@@ -1,0 +1,74 @@
+/*
+Template Name: Online Learning
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+/*********************course****************/
+.team_pg1  {
+margin-left:0;
+margin-right:0; 
+ }
+.testim_1i  {
+margin-left:0;
+margin-right:0; 
+ }
+/*********************course_end****************/
+
+
+@media screen and (max-width : 767px){
+.center_h1r1 img{
+min-height:300px; 
+ }
+.course_dt1l2il img{
+height:30px;
+width:30px; 
+ }
+.course_dt1l2i  h6{
+font-size:12px; 
+ }
+.course_dt1l2ir {
+text-align:center!important;
+ }
+.home_i h4{
+text-align:center; 
+ }
+.profile_i  h4{
+text-align:center;  
+ }
+.profile_i1r {
+margin-top:15px; 
+ }
+.profile1i  h4{
+text-align:center; 
+ }
+
+.course_dt1r{
+margin-top:20px; 
+ }
+
+ }
+
+@media (min-width:576px) and (max-width:767px) {
+
+ }
+@media (min-width:768px) and (max-width:991px) {
+.course_dt1l2i  h6{
+font-size:12px; 
+ }
+.course_dt1l2il img{
+height:30px;
+width:30px; 
+ }
+.course_dt1r h6{
+font-size:12px;  
+ }
+ }
+
+@media (min-width:992px) and (max-width:1200px) {
+
+ }
+
+
+

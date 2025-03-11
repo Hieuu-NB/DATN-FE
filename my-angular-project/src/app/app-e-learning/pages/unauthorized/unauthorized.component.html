@@ -1,0 +1,72 @@
+<p>unauthorized works!</p>
+<div *ngFor="let course of courseFinancial | slice:0:3" class="col-md-4" >
+                
+  <div class="course_h3i1 border_1 p-3 rounded_10">
+    <div   class="grid clearfix">
+
+
+          <figure style=" width: 100%; /* Đảm bảo ảnh không vượt quá khung */
+             height: auto; /* Giữ tỉ lệ ảnh */
+             object-fit: cover; /* Cắt ảnh để vừa với khung */
+             max-width: 382px; /* Đặt kích thước tối đa (có thể thay đổi theo nhu cầu) */
+             max-height: 254.66px;" class="effect-jazz mb-0">
+             <!-- <a href="#"> -->
+                 <div class="video-thumbnail-container" data-bs-toggle="modal" data-bs-target="#videoModal">
+                     <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+
+                     <button class="play-button" type="button" data-bs-toggle="modal" data-bs-target="#videoModal" onclick="event.stopPropagation(); return false;">
+                         ▶{{course.urlS3}}
+                     </button>
+                 </div>
+
+             <!-- Modal Bootstrap -->
+             <!-- Modal Bootstrap riêng biệt -->
+            <div class="modal fade" [id]="'videoModal' + course.course_name" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">Xem Video</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                          <video id="videoPlayer{{course.course_name}}" width="100%" controls>
+                              <source [src]="course.urlS3" type="video/mp4">
+                          </video>
+                      </div>
+                  </div>
+              </div>
+          </div>
+         </figure>  
+          
+
+
+
+
+      </div>
+    <div class="course_h3i1i row mt-3">
+     <div class="col-md-8 col-8">
+      <div class="course_h3i1il">
+       <h6 class="font_14">
+       <a href="#"><img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+        {{course.course_name}}</a></h6>
+      </div>
+     </div>
+     <div class="col-md-4 col-4">
+      <div class="course_h3i1ir text-end pt-2">
+       <h6 class="font_14"><a class="button_1 p-2 px-3" href="#">Science 1</a></h6>
+      </div>
+     </div>
+    </div>
+    <p><a href="#">Finance Series1: Learn to Budget and Calculate your Net Worth.</a></p>
+    <h6 class="font_14"> <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins <span class="pull-right"><i class="fa fa-book col_green me-1"></i> 26 Lectures</span></h6>
+    <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3"><span class="col_green">Free</span> <span class="pull-right fw-normal">
+    4.5
+    <i class="fa fa-star col_yell"></i>
+    <i class="fa fa-star col_yell"></i>
+    <i class="fa fa-star col_yell"></i>
+    <i class="fa fa-star col_yell"></i>
+    <i class="fa fa-star-half-o col_yell"></i>
+    </span>
+     </h5>
+  </div>
+ </div>

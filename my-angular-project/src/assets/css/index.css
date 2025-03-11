@@ -1,0 +1,75 @@
+/*
+Template Name: Online Learning
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+
+/*********************work****************/
+.work_h2i span{
+background:#fff;
+width:65px;
+height:66px;
+line-height:60px; 
+ }
+.work_h2i:hover span{
+background:#309255;
+color:#fff;
+ }
+/*********************work_end****************/
+
+/*********************testim****************/
+.value_1li{
+border-radius:0px 10px 10px 10px; 
+ }
+/*********************testim_end****************/
+
+@media screen and (max-width : 767px){
+.center_h1l{
+margin-bottom:15px;
+ }
+.center_h1l h6{
+text-align:center; 
+ }
+.center_h1r1 img{
+min-height:300px; 
+ }
+
+.work_h2i {
+text-align:center;
+margin-top:8px;
+margin-bottom:8px; 
+ }
+.work_h2i p{
+text-align:left;
+ }
+.classes_1{
+text-align:center; 
+ }
+.value_1li h4{
+text-align:center;  
+ }
+.value_1r{
+margin-top:15px; 
+ }
+ }
+
+@media (min-width:576px) and (max-width:767px) {
+
+ }
+@media (min-width:768px) and (max-width:991px) {
+.center_h1r1 img{
+min-height:460px; 
+ }
+.center_h1l h1{
+font-size:32px;
+ }
+ }
+
+@media (min-width:992px) and (max-width:1200px) {
+
+ }
+
+
+

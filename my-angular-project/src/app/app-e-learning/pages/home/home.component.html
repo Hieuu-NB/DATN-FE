@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Online Learning</title>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <style>
+     /* <!-- CSS sửa lỗi video tràn ra ngoài --> */
+            /* Cố định kích thước modal */
+            .modal-content {
+                width: 800px;
+                max-width: 90%;
+                height: auto;
+            }
+        
+            /* Đảm bảo video luôn vừa với modal */
+            .video-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 450px; /* Định kích thước video */
+                overflow: hidden; /* Chặn tràn nội dung */
+            }
+        
+            .video-player {
+                width: 100%;
+                height: 100%;
+                object-fit: contain; /* Hiển thị video vừa vặn trong modal */
+            }
+        
+            @media (max-width: 768px) {
+                .modal-content {
+                    width: 100%;
+                    height: auto;
+                }
+        
+                .video-container {
+                    height: auto;
+                }
+        
+                .video-player {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+    .video-thumbnail-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .modal {
+  overflow-y: auto !important; /* Đảm bảo modal cuộn được nhưng trang không bị ảnh hưởng */
+}
+body.modal-open {
+    padding-right: 0px !important;
+    overflow: auto !important;
+}
+
+body.modal-open {
+  padding-right: 0px !important; /* Tránh lỗi trang bị đẩy khi modal mở */
+}
+
+      .video-thumbnail {
+        width: 100%;
+        border-radius: 10px;
+      }
+      
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color:  rgba(141, 180, 153, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .play-button:hover {
+        background-color: rgba(146, 204, 163, 0.9);
+      }
+      </style>
+</head>
+<body>
+
+<section id="top" class="bg_dark pt-2 pb-2">
+ <div class="container-xl">
+  <div class="row top_1">
+   <div class="col-md-4">
+    <div class="top_1l pt-2">
+	   <p class="mb-0 text-light font_14">All course 25% off for <span class="col_green">Lorem people’s.</span></p>
+	</div>
+   </div>
+   <div class="col-md-5">
+    <div class="top_1m text-center pt-2">
+	   <ul class="mb-0 font_14">
+	    <li class="d-inline-block"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">+(000) 345 67 89</a></li>
+		<li class="d-inline-block ms-4"><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">infogmail.com</a></li>
+	   </ul>
+	</div>
+   </div>
+   <div class="col-md-3">
+    <div class="top_1r text-end">
+	   <ul class="mb-0">
+	    <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-facebook"></i></a></li>
+		  <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-twitter"></i></a></li>
+		    <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-skype"></i></a></li>
+			  <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-instagram"></i></a></li>
+	   </ul>
+	</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="main bg_light p_3 pb-5">
+  <section id="header">
+<nav class="navbar navbar-expand-md navbar-light border_1 pt-0 pb-0" id="navbar_sticky">
+  <div class="container-xl">
+    <a class="navbar-brand  p-0 fw-bold me-0" href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	   <ul class="navbar-nav mb-0 ms-auto">
+	    
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+		 
+		<li class="nav-item">
+          <a class="nav-link" href="about.html">About </a>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Course
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="course.html"> Course</a></li>
+            <li><a class="dropdown-item border-0" href="detail.html"> Course Detail</a></li>
+          </ul>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="blog.html"> Blog</a></li>
+            <li><a class="dropdown-item border-0" href="blog_detail.html"> Blog Detail</a></li>
+          </ul>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+		   <li><a class="dropdown-item" href="team.html"> Team</a></li>
+		   <li><a class="dropdown-item" href="contact.html"> Contact</a></li>
+		   <li><a class="dropdown-item" href="faq.html"> Faq</a></li>
+            <li><a class="dropdown-item" href="register.html"> Register</a></li>
+            <li><a class="dropdown-item border-0" href="login.html"> Login</a></li>
+          </ul>
+        </li>
+
+				
+      </ul>
+      <ul *ngIf="isLoggedIn()" class="navbar-nav mb-0 ms-auto">
+	   <li class="nav-item">
+          <a class="nav-link" (click)="signUp()">Sign In</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link button" (click)="signIn()">Sign Up</a>
+        </li>
+      </ul>
+
+<!-- sau sẽ code thêm Phần xin chào có tên user các thứ, thay chỗ cho login/sign in -->
+
+    </div>
+  </div>
+</nav>
+</section>
+  <section id="center_h" class="pt-5">
+ <div class="container-xl">
+  <div class="row center_h1">
+    <div class="col-md-4">
+	 <div class="center_h1l">
+	  <h6 class="col_green">Start your favourite course</h6>
+	  <h1 class="mt-4">Now learning from anywhere, and build your <span class="col_green">bright career.</span></h1>
+	  <p class="mt-4">It has survived not only five centuries but also the leap into electronic typesetting.</p>
+	  <h6 class="mb-0 mt-4"><a class="button_1" href="#">Start A Course</a></h6>
+	 </div>
+	</div>
+	<div class="col-md-8">
+	 <div class="center_h1r position-relative">
+	   <div class="center_h1r1">
+	     <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="../../../../assets/img/1.jpg" class="w-100" alt="abc"></a>
+				  </figure>
+			  </div>
+	   </div>
+	   <div class="center_h1r2 position-absolute w-100 top-0 p-3">
+	     <h3 class="mb-0 d-inline-block text-white text-center bg_green rounded-circle"><i class="fa fa-book mb-3"></i> <br> 1,245<br> <span class="fs-6 fw-normal  d-inline-block">Courses</span></h3>
+	   </div>
+	 </div>
+	</div>
+  </div>
+ </div>
+</section>
+</div>
+
+<section id="course_h" class="p_3">
+ <div class="container-xl">
+  <div class="row course_h1">
+    <div class="col-md-6">
+	 <div class="course_h1l">
+	   <h2 class="mb-0 mt-3">All <span class="col_green">Courses</span> of Education</h2>
+	 </div>
+	</div>
+	<div class="col-md-6">
+	 <div class="course_h1r">
+	   <div class="input-group border_1 p-1 rounded_10">
+				<input type="text" class="form-control border-0 rounded-0" placeholder="Search Here">
+				<span class="input-group-btn">
+					<button class="btn btn-primary bg_light border-0 rounded_10 p-3 px-4" type="button">
+						<i class="fa fa-search col_green"></i> </button>
+				</span>
+		</div>
+	 </div>
+	</div>
+  </div>
+  <div class="row course_h2 mt-4">
+   <div class="col-md-12">
+    <div class="course_h2m p-4 bg_light rounded_10">
+	  <ul class="nav nav-tabs mb-0 justify-content-center border-0">
+    <li class="nav-item d-inline-block me-2">
+        <a href="#home" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+            <span class="d-md-block">Development</span>
+        </a>
+    </li>
+    <li class="nav-item d-inline-block me-2">
+        <a href="#profile" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+            <span class="d-md-block">Marketing</span>
+        </a>
+    </li>
+	<li class="nav-item d-inline-block me-2">
+        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+            <span class="d-md-block">Data Science</span>
+        </a>
+    </li>
+    <li class="nav-item d-inline-block me-2">
+        <a href="#profile2" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+            <span class="d-md-block">Business</span>
+        </a>
+    </li>
+	
+	<li class="nav-item d-inline-block me-2">
+        <a href="#profile3" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+            <span class="d-md-block"> Financial</span>
+        </a>
+    </li>
+	
+</ul>
+	</div>
+   </div>
+  </div>
+  <div  class="course_h3 row mt-4">
+	 <div class="tab-content">
+
+
+        <!-- Development -->
+        <div    class="tab-pane active" id="home">
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseDevelopment | slice:0:3; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_dev_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoDev_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoDev_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+            
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+            
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+                <br>        
+            <!--  hiển thị thêm 3 phần tử nếu list còn -->
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseDevelopment | slice:3:6; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_dev_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoDev_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoDev_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Marketing -->
+        <div    class="tab-pane" id="profile">
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseMarketing | slice:0:3; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_mark_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoMark_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoMark_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+            
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+            
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+                <br>        
+            <!--  hiển thị thêm 3 phần tử nếu list còn -->
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseMarketing | slice:3:6; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_mark_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoMark_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoMark_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Data Science -->
+        <div    class="tab-pane" id="profile1">
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseDataScience | slice:0:3; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_data_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoData_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoData_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+            
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+            
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+                <br>        
+            <!--  hiển thị thêm 3 phần tử nếu list còn -->
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseDataScience | slice:3:6; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_data_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoData_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoData_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business -->
+        <div    class="tab-pane" id="profile2">
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseBusiness | slice:0:3; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_bus_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoBus_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoBus_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+            
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+            
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+                <br>        
+            <!--  hiển thị thêm 3 phần tử nếu list còn -->
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseBusiness | slice:3:6; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_bus_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoBus_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoBus_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial -->
+        <div    class="tab-pane" id="profile3">
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseFinancial | slice:0:3; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_fin_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoFin_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoFin_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+            
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+            
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+                <br>        
+            <!--  hiển thị thêm 3 phần tử nếu list còn -->
+            <div class="course_h3i row">
+                <div *ngFor="let course of courseFinancial | slice:3:6; let i = index" class="col-md-4">
+                    <div class="course_h3i1 border_1 p-3 rounded_10">
+                        <div class="grid clearfix">
+                            <figure class="effect-jazz mb-0">
+                                <!-- Thumbnail với nút Play -->
+                                <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
+                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
+                                        ▶
+                                    </button>
+                                </div>
+                            </figure>
+                        </div>
+            
+                        <!-- Modal Bootstrap -->
+                        <div class="modal fade"
+                            [id]="'videoModal_fin_' + i"
+                            tabindex="-1"
+                            aria-hidden="true"
+                            data-bs-backdrop="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Xem Video Demo</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                (click)="closeVideo('videoFin_' + i)"
+                                                data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body video-container">
+                                        <video [id]="'videoFin_' + i"
+                                            class="video-player"
+                                            controls>
+                                            <source [src]="course.urlS3" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="course_h3i1i row mt-3">
+                            <div class="col-md-8 col-8">
+                                <div class="course_h3i1il">
+                                    <h6 class="font_14">
+                                        <a href="#">
+                                            <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+                                            {{course.course_name}}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <div class="course_h3i1ir text-end pt-2">
+                                    <h6 class="font_14">
+                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <a class="hover-link" (click)="openCourseDetail(course.course_name)">Finance Series1: Learn to Budget and Calculate your Net Worth.</a>
+                        </p>
+                        <h6 class="font_14">
+                            <i class="fa fa-clock-o col_green me-1"></i> 07 hr 18 mins
+                            <span class="pull-right">
+                                <i class="fa fa-book col_green me-1"></i> 26 Lectures
+                            </span>
+                        </h6>
+                        <h5 class="mb-0 fs-6 mt-3 bg_light rounded_10 p-3">
+                            <span class="col_green">Free</span>
+                            <span class="pull-right fw-normal">
+                                4.5
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star col_yell"></i>
+                                <i class="fa fa-star-half-o col_yell"></i>
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    
+    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--Become A Instructor  -->
+   <div class="course_h4 row text-center mt-4">
+    <div class="col-md-12">
+	  <h6 class="mb-0"><a class="button_1" href="#">Other Course</a></h6>
+	</div>
+   </div>
+   <div class="course_h5 row mt-4 bg_light rounded_10 p-5 px-4 mx-0">
+    <div class="col-md-8">
+	 <div class="course_h5l">
+	  <h5 class="col_green fw-normal">Become A Instructor</h5>
+	  <h2 class="mb-0 mt-3">You can join with Education <br> as a <span class="col_green">instructor?</span></h2>
+	 </div>
+	</div>
+	<div class="col-md-4">
+	 <div class="course_h5r text-end pt-4">
+	   <h6 class="mb-0"><a class="button_1" href="#">Drop Information</a></h6>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<section id="work_h" class="p_3 pt-0">
+ <div class="container-xl">
+  <div class="row work_h1 text-center mb-4">
+     <div class="col-md-12">
+	  <h5 class="fw-normal col_green">Over 1,155+ Course</h5>
+	  <h2 class="mb-0 mt-3">How <span class="col_green">It Work?</span></h2>
+	 </div>
+  </div>
+  <div class="row work_h2r">
+   <div class="col-md-4">
+    <div class="work_h2i p-4 bg_light rounded_10">
+	 <span class="d-inline-block rounded_10  border_1 text-center fs-3 col_green"><i class="fa fa-search"></i></span>
+	 <h4 class="mt-4 mb-3">Find Your Course</h4>
+	 <p class="mb-0">It has survived not only centurie also leap into electronic.</p>
+	</div>
+   </div>
+   <div class="col-md-4">
+    <div class="work_h2i p-4 bg_light rounded_10">
+	 <span class="d-inline-block rounded_10  border_1 text-center fs-3 col_green"><i class="fa fa-file"></i></span>
+	 <h4 class="mt-4 mb-3">Book A Seat</h4>
+	 <p class="mb-0">It has survived not only centurie also leap into electronic.</p>
+	</div>
+   </div>
+   <div class="col-md-4">
+    <div class="work_h2i p-4 bg_light rounded_10">
+	 <span class="d-inline-block rounded_10  border_1 text-center fs-3 col_green"><i class="fa fa-graduation-cap"></i></span>
+	 <h4 class="mt-4 mb-3">Get Certificate</h4>
+	 <p class="mb-0">It has survived not only centurie also leap into electronic.</p>
+	</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="app" class="pt-5 pb-5 bg_green">
+ <div class="container-xl">
+   <div class="app_1 row mt-4">
+    <div class="col-md-8">
+	 <div class="app_1l">
+	  <h5 class="text-light fw-normal">Ready to start?</h5>
+	  <h2 class="mb-0 mt-3 text-white">Download our mobile app. <br> as a <span>for easy to start your course.</span></h2>
+	 </div>
+	</div>
+	<div class="col-md-4">
+	 <div class="app_1r pt-5 text-end">
+	    <ul class="mb-0">
+		 <li class="d-inline-block"><a class="bg-white rounded_10 p-3 px-4" href="#"><i class="fa fa-play col_green me-1"></i> Google Play</a></li>
+		 <li class="d-inline-block ms-3"><a class="bg-white rounded_10 p-3 px-4" href="#"><i class="fa fa-apple col_green me-1"></i> App Store</a></li>
+		</ul>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<section id="testim" class="p_3 carousel_p">
+ <div class="container-xl">
+  <div class="row work_h1 text-center mb-4">
+     <div class="col-md-12">
+	  <h5 class="fw-normal col_green">Student Testimonial</h5>
+	  <h2 class="mb-0 mt-3">Feedback From  <span class="col_green">Student</span></h2>
+	 </div>
+  </div>
+  <div class="row testim_1">
+     <div id="carouselExampleCaptions1" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions1" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions1" data-bs-slide-to="1" aria-label="Slide 2" class="" aria-current="true"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div class="testim_1i row">
+		 <div class="col-md-6">
+		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
+		        <img src="img/8.jpg" class="rounded-circle" alt="abc"><br>
+		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
+			   <span>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star-half-o col_yell"></i>
+			</span>		
+			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<h5>Nulla Quis</h5> 
+			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
+		  </div>
+		 </div>
+		 <div class="col-md-6">
+		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
+		        <img src="img/11.jpg" class="rounded-circle" alt="abc"><br>
+		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
+			   <span>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star-half-o col_yell"></i>
+			</span>		
+			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<h5>Semp Porta</h5> 
+			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
+		  </div>
+		 </div>
+		</div>
+    </div>
+    <div class="carousel-item">
+          <div class="testim_1i row">
+		 <div class="col-md-6">
+		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
+		        <img src="img/9.jpg" class="rounded-circle" alt="abc"><br>
+		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
+			   <span>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star-half-o col_yell"></i>
+			</span>		
+			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<h5>Ipsum Augue</h5> 
+			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
+		  </div>
+		 </div>
+		 <div class="col-md-6">
+		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
+		        <img src="img/13.jpg" class="rounded-circle" alt="abc"><br>
+		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
+			   <span>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star col_yell"></i>
+			<i class="fa fa-star-half-o col_yell"></i>
+			</span>		
+			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<h5>Lorem Amet</h5> 
+			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
+		  </div>
+		 </div>
+		</div>
+    </div>
+  </div>
+</div>
+  </div>
+ </div>
+</section>
+
+<section id="value" class="p_3 bg_light">
+ <div class="container-xl">
+     <div class="value_1  row">
+	 <div class="col-md-6">
+      <div class="value_1l">
+	     <div class="classes_1  mb-4">
+		   <h4 class="col_green">Our Care Value</h4>
+	  <h3 class="mb-0">Students Care Education</h3>
+	 	</div>
+	     <div class="value_1li bg-white">
+	       <h6 class="d-inline-block bg_green text-white px-3 pt-2 pb-2">Care Value</h6>
+		   <h4 class="mt-2 px-4">Safe Enviroment</h4>
+		   <p class="mt-2 mb-0 px-4 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer adipiscing erat eget risus sollicitudin pellentesque.</p>
+	     </div>
+		 <div class="value_1li bg-white mt-4">
+	       <h6 class="d-inline-block bg_green text-white px-3 pt-2 pb-2">Care Value</h6>
+		   <h4 class="mt-2 px-4">We Love Students</h4>
+		   <p class="mt-2 mb-0 px-4 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer adipiscing erat eget risus sollicitudin pellentesque.</p>
+	     </div>
+		 <div class="value_1li bg-white mt-4">
+	       <h6 class="d-inline-block bg_green text-white px-3 pt-2 pb-2">Care Value</h6>
+		   <h4 class="mt-2 px-4">Qualified Education</h4>
+		   <p class="mt-2 mb-0 px-4 pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer adipiscing erat eget risus sollicitudin pellentesque.</p>
+	     </div>
+	  </div>
+	 </div>
+	 <div class="col-md-6">
+    <div class="value_1r">
+      <iframe  
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4093191177397!2d105.84181127591875!3d21.003668487526795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f8!3m3!1m2!1s0x3135aca191555555%3A0xb17d4104052d48cb!2zVHLGsOG7nW5nIMSQ4bqhaSBIw6BuaCBUcsOgbmcgS2luaCB04buRYyBRdeG7kWMgRGFuZyAoTkVVKQ!5e0!3m2!1svi!2s!4v1709641234567" 
+      height="630" 
+      style="border:0; width:100%;" 
+      allowfullscreen="" 
+      loading="lazy">
+  </iframe>
+	</div>
+   </div>
+	</div>
+ </div>
+</section>
+
+<section id="news" class="p_3">
+ <div class="container-xl">
+  <div class="row work_h1 text-center mb-4">
+     <div class="col-md-12">
+	  <h5 class="fw-normal col_green">Latest News</h5>
+	  <h2 class="mb-0 mt-3">Educational Tips &   <span class="col_green">Tricks</span></h2>
+	 </div>
+  </div>
+  <div class="course_h3i row">
+		 <div class="col-md-4">
+		  <div class="course_h3i1 border_1 p-3 rounded_10">
+		    <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="../../../../assets/img/2.jpg" class="w-100" alt="abc"></a>
+				  </figure>
+			  </div>
+			<div class="course_h3i1i row mt-3">
+			 <div class="col-md-8 col-8">
+			  <div class="course_h3i1il">
+			   <h6 class="font_14">
+			   <a href="#"><img src="../../../../assets/img/8.jpg" class="rounded-circle me-2" alt="abc">
+			   Lorem Amet</a></h6>
+			  </div>
+			 </div>
+			 <div class="col-md-4 col-4">
+			  <div class="course_h3i1ir text-end pt-2">
+			   <h6 class="font_14"><a class="button_1 p-2 px-3" href="#">Science</a></h6>
+			  </div>
+			 </div>
+			</div>
+			<p><a href="#">Finance Series: Learn to Budget and Calculate your Net Worth.</a></p>
+			<h6 class="font_14"> <i class="fa fa-calendar col_green me-1"></i> 23 March, 2022 <span class="pull-right"><i class="fa fa-heart col_green me-1"></i> 2,258+</span></h6>
+			<h6 class="mb-0 mt-4 center_sm"><a class="button p-3 px-4" href="#">Read More</a></h6>
+		  </div>
+		 </div>
+		 <div class="col-md-4">
+		  <div class="course_h3i1 border_1 p-3 rounded_10">
+		    <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="../../../../assets/img/3.jpg" class="w-100" alt="abc"></a>
+				  </figure>
+			  </div>
+			<div class="course_h3i1i row mt-3">
+			 <div class="col-md-8 col-8">
+			  <div class="course_h3i1il">
+			   <h6 class="font_14">
+			   <a href="#"><img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
+			   Ipsum Sit</a></h6>
+			  </div>
+			 </div>
+			 <div class="col-md-4 col-4">
+			  <div class="course_h3i1ir text-end pt-2">
+			   <h6 class="font_14"><a class="button_1 p-2 px-3" href="#">Finance</a></h6>
+			  </div>
+			 </div>
+			</div>
+			<p><a href="#">Build Brand Into Marketing: Tackling the New Marketing Landscape</a></p>
+			<h6 class="font_14"> <i class="fa fa-calendar col_green me-1"></i> 26 March, 2022 <span class="pull-right"><i class="fa fa-heart col_green me-1"></i> 2,352+</span></h6>
+			<h6 class="mb-0 mt-4 center_sm"><a class="button p-3 px-4" href="#">Read More</a></h6>
+		  </div>
+		 </div>
+		 <div class="col-md-4">
+		  <div class="course_h3i1 border_1 p-3 rounded_10">
+		    <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="../../../../assets/img/4.jpg" class="w-100" alt="abc"></a>
+				  </figure>
+			  </div>
+			<div class="course_h3i1i row mt-3">
+			 <div class="col-md-8 col-8">
+			  <div class="course_h3i1il">
+			   <h6 class="font_14">
+			   <a href="#"><img src="img/10.jpg" class="rounded-circle me-2" alt="abc">
+			   Dolor Quis</a></h6>
+			  </div>
+			 </div>
+			 <div class="col-md-4 col-4">
+			  <div class="course_h3i1ir text-end pt-2">
+			   <h6 class="font_14"><a class="button_1 p-2 px-3" href="#">Design</a></h6>
+			  </div>
+			 </div>
+			</div>
+			<p><a href="#">Create Amazing Color Schemes for Your UX Design Projects</a></p>
+			<h6 class="font_14"> <i class="fa fa-calendar col_green me-1"></i> 27 March, 2022 <span class="pull-right"><i class="fa fa-heart col_green me-1"></i> 1,792+</span></h6>
+			<h6 class="mb-0 mt-4 center_sm"><a class="button p-3 px-4" href="#">Read More</a></h6>
+		  </div>
+		 </div>
+		</div>
+ </div>
+</section>
+
+<section id="footer" class="p_3 bg_light">
+ <div class="container-xl">
+   <div class="row footer_1">
+    <div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3"><a href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a></h4>
+	  <h5>Semper Dt</h5>
+	  <h6 class="col_green mt-3 mb-3">Lorem, Augue (UB).</h6>
+	  <h6><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a href="#">infogmail.com</a></h6>
+	  <h6 class="mt-3"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a href="#">+(000) 345 67 89 </a></h6>
+	  <ul class="mb-0 mt-3">
+	    <li class="d-inline-block fs-4 me-2"> <a href="#"><i class="fa fa-facebook"></i></a></li>
+		  <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-twitter"></i></a></li>
+		    <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-skype"></i></a></li>
+			  <li class="d-inline-block fs-4"> <a  href="#"><i class="fa fa-instagram"></i></a></li>
+	   </ul>
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Category</h4>
+	  <div class="row footer_3ism">
+			<h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Creative Writing</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Film & Video</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Graphic Design</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> UI/UX Design</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Business Analytics</a></h6>
+			<h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Marketing</a></h6>
+	    </div>
+	
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Quick Links</h4>
+	  <div class="row footer_3ism">
+			<h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Privacy Policy</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Discussion</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Terms & Conditions</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Customer Support</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i>  Our Service</a></h6>
+			<h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Course FAQ’s</a></h6>
+	    </div>
+	
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Subscribe</h4>
+	  <p>Lorem Ipsum has been them an industry printer took a galley make book.</p>
+	  <input class="form-control rounded_10" placeholder="Email here" type="text">
+	<h6 class="mb-0 mt-3"><a class="button_1" href="#">Subscribe Now</a></h6>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<section id="footer_b" class="pt-3 pb-3 bg_dark">
+ <div class="container-xl">
+   <div class="footer_b1 row">
+	<div class="col-md-5">
+	 <div class="footer_b1r">
+	  <ul class="mb-0">
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Our Terms</a></li>
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Privacy</a></li>
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Sitemap</a></li>
+	   <li class="d-inline-block"><a class="text-white" href="#">Support</a></li>
+	  </ul>
+	 </div>
+	</div>
+	<div class="col-md-7">
+	 <div class="footer_b1l text-end">
+	   <p class="mb-0 text-light">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_green fw-bold" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<script>
+window.onscroll = function() {myFunction()};
+var navbar_sticky = document.getElementById("navbar_sticky");
+var sticky = navbar_sticky.offsetTop;
+var navbar_height = document.querySelector('.navbar').offsetHeight;
+function myFunction() {
+  if (window.pageYOffset >= sticky + navbar_height) {
+    navbar_sticky.classList.add("sticky")
+	document.body.style.paddingTop = navbar_height + 'px';
+  } else {
+    navbar_sticky.classList.remove("sticky");
+	document.body.style.paddingTop = '0'
+  }
+}
+</script>
+
+</body>
+
+</html>

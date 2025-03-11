@@ -1,0 +1,79 @@
+/*
+Template Name: Online Learning
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+/*********************contact****************/
+.contact_1lil span i{
+width:70px;
+height:70px;
+line-height:70px; 
+ }
+.contact_1lil span:hover i{
+background:#309255!important;
+color:#fff; 
+ }
+.faq_1i:hover{
+background:#eefbf3; 
+ }
+.faq_1i:hover h5{
+color:#309255;
+ }
+/*********************contact_end****************/
+
+
+@media screen and (max-width : 767px){
+.contact_1li {
+text-align:center; 
+ }
+.contact_1r{
+margin-top:15px;
+text-align:center; 
+ }
+.faq_1il{
+margin-top:0!important;
+margin-bottom:15px;
+ }
+.log_box1l img{
+height:auto; 
+ }
+.log_box1r{
+margin-top:15px; 
+text-align:center;
+ }
+ }
+
+@media (min-width:576px) and (max-width:767px) {
+
+ }
+@media (min-width:768px) and (max-width:991px) {
+.contact_1lil span i{
+width:40px;
+height:40px;
+line-height:40px;
+font-size:20px!important; 
+ }
+.contact_1lil span{
+padding:10px!important; 
+ }
+.log_box1l img{
+min-height:350px;
+ }
+ }
+
+@media (min-width:992px) and (max-width:1200px) {
+.contact_1lil span i{
+width:40px;
+height:40px;
+line-height:40px;
+font-size:20px!important; 
+ }
+.log_box1l img{
+min-height:350px;
+ }
+ }
+
+
+

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang đọc truyện</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .story-image {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 0px 10px 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .user-info {
+            text-align: right;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            flex: 1; /* Để logo căn giữa */
+        }
+        .search-bar {
+            flex-grow: 2; /* Để ô input tìm kiếm mở rộng ra */
+            margin: 0 20px;
+            display: flex;
+            align-items: center; /* Căn giữa theo chiều dọc */
+        }
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px; /* Độ cao của ô input tìm kiếm */
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #45a049;
+        }
+        .user-info {
+            text-align: right;
+            flex: 1; 
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-info button {
+            padding: 8px 15px;
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .user-info button:hover {
+            background-color: #d32f2f;
+        }
+
+
+        /* ==========footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+          
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .footer-section {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+        .footer-section h3 {
+            margin-bottom: 10px;
+        }
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 5px;
+        }
+        .footer-section .background-image {
+            width: 100%;
+            height: 150px;
+            background-image: url('https://via.placeholder.com/150');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+        }
+        .footer-section .background-image:hover {
+            opacity: 1;
+        }
+
+
+        /* bình luận */
+
+        .comment-section {
+  width: 800px;
+  margin: 50px auto;
+}
+
+.comments-list {
+  margin-bottom: 20px;
+}
+
+.comment {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment-text {
+  margin: 5px 0;
+}
+
+.comment-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.comment-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #45a049;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">Hiếu</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm...">
+            <button style="margin-left: 20px;">Search</button>
+        </div>
+        <div style="line-height: 70px;" class="user-info">
+            <span style="line-height: 60px;">Xin chào, Hiếu</span>
+            <button style="height: 40px;margin-top: 10px;" (click)="logOut()">Đăng xuất</button>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <h1>Trang đọc truyện</h1>
+        <div *ngFor="let imageUrl of trangTruyen" class="story-list">
+            
+            <img [src]="imageUrl.linkTrangTruyen" alt="Truyện 1" class="story-image"> 
+          
+        </div>
+    </div>
+    <div class="comment-section">
+        <h2>Bình luận</h2>
+        <div *ngFor="let cmt of list_commennt" class="comments-list">
+          <div class="comment">
+            <p class="comment-text">Bạn Đọc: {{cmt}}</p>
+          </div>
+          <!-- Thêm các phần tử comment tương ứng với bình luận đã có ở đây -->
+        </div>
+        <form [formGroup]="searchForm" class="comment-form">
+          <textarea formControlName="comment" class="comment-input" placeholder="Nhập bình luận của bạn"></textarea>
+          <button type="submit" (click)="submitCmt()" class="comment-btn">Gửi</button>
+        </form>
+      </div>
+      
+
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Về Chúng Tôi</h3>
+                <p>Mang lại cho bạn những trải nghiệm đọc truyện tuyệt vời nhất.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên Hệ</h3>
+                <ul>
+                    <li>Email: contact.com</li>
+                    <li>Điện thoại: 0123-456-789</li>
+                    <li>Địa chỉ: Số 123, Đường ABC, Thành phố XYZ</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Liên Kết</h3>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Truyện mới</a></li>
+                    <li><a href="#">Truyện nổi bật</a></li>
+                    <li><a href="#">Danh mục</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="background-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

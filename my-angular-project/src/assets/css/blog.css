@@ -1,0 +1,108 @@
+/*
+Template Name: Online Learning
+File: Layout CSS
+Author: TemplatesOnWeb
+Author URI: https://www.templateonweb.com/
+Licence: <a href="https://www.templateonweb.com/license">Website Template Licence</a>
+*/
+/*********************blog****************/
+.news_dt1l2i h6 a:hover{
+background-color: #eefbf3; 
+ }
+.news_dt1l3i ul li  a {
+border:1px solid #c1ddcc; 
+padding: 7px 10px;
+display: block;
+border-radius: 5px;
+margin: 0 2px 5px 0;
+}
+.news_dt1l3i ul li  a:hover {
+background:#309255;
+color:#fff;
+}
+.course_dt1l2ir .button{
+padding:10px 30px!important; 
+ }
+.news_dt1r3 .news_dt1l3i ul li  a {
+padding: 7px 15px; 
+ }
+/*********************blog_end****************/
+
+
+@media screen and (max-width : 767px){
+.news_dt1l2  h4{
+text-align:center; 
+ }
+.news_dt1l3  h4{
+text-align:center; 
+ }
+.course_dt1l2ir li {
+font-size:12px;
+ }
+.course_dt1l2ir .button {
+padding-left:10px!important;
+padding-right:10px!important;
+ }
+.news_dt1r{
+margin-top:20px; 
+ }
+.course_dt1l2ir {
+text-align:left!important;
+margin-top:15px; 
+ }
+.news_dt1r4  h4{
+text-align:center; 
+ }
+.news_dt1r4i {
+padding-left:5px!important;
+padding-right:5px!important;
+ }
+.news_dt1r4ir h5{
+font-size:14px;
+margin-bottom:25px; 
+ }
+.news_dt1r4ir h5 a{
+padding-left:10px!important;
+padding-right:10px!important;
+ }
+.news_dt1r4ir .font_14{
+font-size:12px; 
+ }
+.news_dt1r4ir p{
+font-size:12px; 
+ }
+ .news_dt1r5  h4{
+text-align:center; 
+ }
+
+ }
+
+@media (min-width:576px) and (max-width:767px) {
+
+ }
+@media (min-width:768px) and (max-width:991px) {
+.news_dt1l h6{
+font-size:12px; 
+ }
+.course_dt1l2ir li {
+font-size:10px;
+ }
+.course_dt1l2ir .button {
+padding-left:10px!important;
+padding-right:10px!important;
+ }
+.course_dt1l2i  h6{
+font-size:12px; 
+ }
+.course_dt1l2il img{
+height:30px;
+width:30px; 
+ }
+ }
+
+@media (min-width:992px) and (max-width:1200px) {
+
+ }
+
+
+

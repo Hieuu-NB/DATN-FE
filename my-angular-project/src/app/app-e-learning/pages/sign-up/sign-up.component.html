@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Online Learning</title>
+    <style>select {
+        appearance: none; /* Ẩn kiểu mặc định của trình duyệt */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="gray"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 1rem;
+        padding-right: 2rem;
+      }
+        
+      </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<section id="top" class="bg_dark pt-2 pb-2">
+ <div class="container-xl">
+  <div class="row top_1">
+   <div class="col-md-4">
+    <div class="top_1l pt-2">
+	   <p class="mb-0 text-light font_14">All course 24% off for <span class="col_green">Lorem people’s.</span></p>
+	</div>
+   </div>
+   <div class="col-md-5">
+    <div class="top_1m text-center pt-2">
+	   <ul class="mb-0 font_14">
+	    <li class="d-inline-block"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">+(000) 345 67 89</a></li>
+		<li class="d-inline-block ms-4"><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">infogmail.com</a></li>
+	   </ul>
+	</div>
+   </div>
+   <div class="col-md-3">
+    <div class="top_1r text-end">
+	   <ul class="mb-0">
+	    <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-facebook"></i></a></li>
+		  <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-twitter"></i></a></li>
+		    <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-skype"></i></a></li>
+			  <li class="d-inline-block fs-4 mx-2"> <a class="text-light" href="#"><i class="fa fa-instagram"></i></a></li>
+	   </ul>
+	</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="main bg_light p_3 pb-4">
+  <section id="header">
+<nav class="navbar navbar-expand-md navbar-light border_1 pt-0 pb-0" id="navbar_sticky">
+  <div class="container-xl">
+    <a class="navbar-brand  p-0 fw-bold me-0" href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	   <ul class="navbar-nav mb-0 ms-auto">
+	    
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="index.html">Home</a>
+        </li>
+		 
+		<li class="nav-item">
+          <a class="nav-link" href="about.html">About </a>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Course
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="course.html"> Course</a></li>
+            <li><a class="dropdown-item border-0" href="detail.html"> Course Detail</a></li>
+          </ul>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="blog.html"> Blog</a></li>
+            <li><a class="dropdown-item border-0" href="blog_detail.html"> Blog Detail</a></li>
+          </ul>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+		   <li><a class="dropdown-item" href="team.html"> Team</a></li>
+		   <li><a class="dropdown-item" href="contact.html"> Contact</a></li>
+		   <li><a class="dropdown-item" href="faq.html"> Faq</a></li>
+            <li><a class="dropdown-item" href="register.html"> Register</a></li>
+            <li><a class="dropdown-item border-0" href="login.html"> Login</a></li>
+          </ul>
+        </li>
+
+				
+      </ul>
+      <ul class="navbar-nav mb-0 ms-auto">
+	   <li class="nav-item">
+          <a class="nav-link"  (click)="signIn()">Sign In</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link button"  (click)="signUp()">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</section>
+  <section id="center_h" class="pt-4">
+ <div class="container-xl">
+  <div class="row center_o1">
+   <div class="col-md-5">
+     <div class="center_o1l">
+	  <h2 class="mb-0 fs-3">Register</h2>
+	 </div>
+   </div>
+   <div class="col-md-7">
+     <div class="center_o1r text-end">
+	  <h6 class="mb-0 col_green mt-2"><a  href="#">Home</a> <span class="me-2 ms-2"><i class="fa fa-caret-right text-muted"></i></span> Register</h6>
+	 </div>
+   </div>
+  </div>
+ </div>
+</section>
+</div>
+
+<section id="log_box" class="p_3">
+ <div class="container-xl">
+    <div class="log_box1 row p-4 px-3  border_1 rounded_10 mx-0">
+    <div class="col-md-6">
+	 <div class="log_box1l">
+	    <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="../../../../assets/img/25.jpg" height="470" class="w-100" alt="abc"></a>
+				  </figure>
+			  </div>
+	 </div>
+	</div>
+	<div class="col-md-6">
+	 <div class="log_box1r">
+	  <h3 class="mb-4">Registration <span class="col_green">Now</span></h3>
+
+      <form [formGroup]="signUpForm" id="signUp-form" >
+        <input class="form-control rounded-3" formControlName="username" placeholder="Username" type="text">
+        <input class="form-control rounded-3 mt-3" formControlName="email" placeholder="Email" type="text">
+        <input class="form-control rounded-3 mt-3" formControlName="phone" placeholder="Phone" type="text">
+        <input class="form-control rounded-3 mt-3" formControlName="password" placeholder="Password" type="password">
+        <input class="form-control rounded-3 mt-3" placeholder="Confirm Password" type="password">
+        
+        <select class="form-control rounded-3 mt-3" formControlName="role">
+            <option value="" disabled selected>Role</option>
+            <option value="TEACHER">Teacher</option>
+            <option value="STUDENT">Student</option>
+          </select>
+          
+        
+      </form> 
+
+	  <h6 class="mb-0 mt-4 text-center"><a class="button_1 d-block" (click)="register()">Create an account </a></h6>
+	  <h6 class="mb-0 mt-4 text-center"><a class="button d-block" href="#">Sign up with Google </a></h6>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+
+
+<section id="app" class="pt-5 pb-5 bg_green">
+ <div class="container-xl">
+   <div class="app_1 row mt-4">
+    <div class="col-md-8">
+	 <div class="app_1l">
+	  <h5 class="text-light fw-normal">Ready to start?</h5>
+	  <h2 class="mb-0 mt-3 text-white">Download our mobile app. <br> as a <span>for easy to start your course.</span></h2>
+	 </div>
+	</div>
+	<div class="col-md-4">
+	 <div class="app_1r pt-5 text-end">
+	    <ul class="mb-0">
+		 <li class="d-inline-block"><a class="bg-white rounded_10 p-3 px-4" href="#"><i class="fa fa-play col_green me-1"></i> Google Play</a></li>
+		 <li class="d-inline-block ms-3"><a class="bg-white rounded_10 p-3 px-4" href="#"><i class="fa fa-apple col_green me-1"></i> App Store</a></li>
+		</ul>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+
+<section id="footer" class="p_3 bg_light">
+ <div class="container-xl">
+   <div class="row footer_1">
+    <div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3"><a href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a></h4>
+	  <h5>Semper Dt</h5>
+	  <h6 class="col_green mt-3 mb-3">Lorem, Augue (UB).</h6>
+	  <h6><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a href="#">infogmail.com</a></h6>
+	  <h6 class="mt-3"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a href="#">+(000) 345 67 89 </a></h6>
+	  <ul class="mb-0 mt-3">
+	    <li class="d-inline-block fs-4 me-2"> <a href="#"><i class="fa fa-facebook"></i></a></li>
+		  <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-twitter"></i></a></li>
+		    <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-skype"></i></a></li>
+			  <li class="d-inline-block fs-4"> <a  href="#"><i class="fa fa-instagram"></i></a></li>
+	   </ul>
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Category</h4>
+	  <div class="row footer_3ism">
+			<h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Creative Writing</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Film & Video</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Graphic Design</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> UI/UX Design</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Business Analytics</a></h6>
+			<h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Marketing</a></h6>
+	    </div>
+	
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Quick Links</h4>
+	  <div class="row footer_3ism">
+			<h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Privacy Policy</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Discussion</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Terms & Conditions</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Customer Support</a></h6>
+			<h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i>  Our Service</a></h6>
+			<h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Course FAQ’s</a></h6>
+	    </div>
+	
+	 </div>
+	</div>
+	<div class="col-md-3">
+	 <div class="footer_1i">
+	  <h4 class="mb-3">Subscribe</h4>
+	  <p>Lorem Ipsum has been them an industry printer took a galley make book.</p>
+	  <input class="form-control rounded_10" placeholder="Email here" type="text">
+	<h6 class="mb-0 mt-3"><a class="button_1" href="#">Subscribe Now</a></h6>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<section id="footer_b" class="pt-3 pb-3 bg_dark">
+ <div class="container-xl">
+   <div class="footer_b1 row">
+	<div class="col-md-5">
+	 <div class="footer_b1r">
+	  <ul class="mb-0">
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Our Terms</a></li>
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Privacy</a></li>
+	   <li class="d-inline-block me-2"><a class="text-white" href="#">Sitemap</a></li>
+	   <li class="d-inline-block"><a class="text-white" href="#">Support</a></li>
+	  </ul>
+	 </div>
+	</div>
+	<div class="col-md-7">
+	 <div class="footer_b1l text-end">
+	   <p class="mb-0 text-light">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_green fw-bold" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
+	 </div>
+	</div>
+   </div>
+ </div>
+</section>
+
+<script>
+window.onscroll = function() {myFunction()};
+var navbar_sticky = document.getElementById("navbar_sticky");
+var sticky = navbar_sticky.offsetTop;
+var navbar_height = document.querySelector('.navbar').offsetHeight;
+function myFunction() {
+  if (window.pageYOffset >= sticky + navbar_height) {
+    navbar_sticky.classList.add("sticky")
+	document.body.style.paddingTop = navbar_height + 'px';
+  } else {
+    navbar_sticky.classList.remove("sticky");
+	document.body.style.paddingTop = '0'
+  }
+}
+</script>
+
+</body>
+
+</html>
