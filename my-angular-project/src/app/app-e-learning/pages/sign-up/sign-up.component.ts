@@ -21,25 +21,13 @@ export class SignUpComponent implements OnInit {
     phone: new FormControl('')
   });
 
-  
-  // signUpForm: FormGroup;
-
   constructor( private appservice: AppService,
       private fb: FormBuilder,
       private router:Router,
       private authService: AuthService) { 
-
-        // this.signUpForm = this.fb.group({
-        //   username: ['', Validators.required],
-        //   email: ['', [Validators.required, Validators.email]],
-        //   phone: ['', Validators.required],
-        //   password: ['', Validators.required],
-        //   role: ['', Validators.required], // Bắt buộc chọn role
-        // });
       }
 
   ngOnInit(): void {
-
   }
 
 

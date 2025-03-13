@@ -28,6 +28,21 @@ export class AuthService {
     return [];
   }
 
+  getUserName(): string {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        return decodedToken.sub || 'Người dùng'; // Lấy giá trị từ "sub"
+      } catch (error) {
+        console.error('Invalid token:', error);
+      }
+    }
+    return 'Người dùng';
+  }
+  
+  
+
   // Kiểm tra quyền truy cập
   hasRole(requiredRoles: string[]): boolean {
     const userRoles = this.getUserRoles();
@@ -37,6 +52,6 @@ export class AuthService {
   // Đăng xuất (xóa token)
   logout(): void {
     localStorage.removeItem('accessToken');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/sign-in']);
   }
 }

@@ -94,6 +94,8 @@
 
 				
       </ul>
+
+<!-- 	  
       <ul class="navbar-nav mb-0 ms-auto">
 	   <li class="nav-item">
           <a class="nav-link" href="login.html">Sign In</a>
@@ -101,7 +103,32 @@
 		<li class="nav-item">
           <a class="nav-link button" href="register.html">Sign Up</a>
         </li>
-      </ul>
+      </ul> -->
+	  <ul *ngIf="isLoggedIn()" class="navbar-nav mb-0 ms-auto">
+		<li class="nav-item">
+		   <a class="nav-link" (click)="signIn()">Sign In</a>
+		 </li>
+		 <li class="nav-item">
+		   <a class="nav-link button" (click)="signUp()">Sign Up</a>
+		 </li>
+	   </ul>
+ 
+	   <ul  *ngIf="!isLoggedIn()" class="navbar-nav mb-0 ms-auto">
+		 <li class="nav-item dropdown">
+			 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrY7dJj0QnImGcypj9oBdr9u9joHrxgaKY_g&s" class="rounded-circle me-2" width="32" height="25" alt="User Avatar">
+				 <span>Xin chào, {{ userName }}</span>
+			   </a>
+		   <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
+			 <li ><a class="dropdown-item" (click)="viewProfile()">👤 Thông tin cá nhân</a></li>
+			   <li><a class="dropdown-item" (click)="editProfile()">⚙️ Chỉnh sửa thông tin</a></li>
+			   <li><a class="dropdown-item text-danger"  (click)="logout()">🚪 Đăng xuất</a></li>
+		   </ul>
+		 </li>
+	   </ul>
+
+
+
     </div>
   </div>
 </nav>
@@ -313,7 +340,7 @@
 		  <div class="testim_1i row">
 		 <div class="col-md-6">
 		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
-		        <img src="img/8.jpg" class="rounded-circle" alt="abc"><br>
+		        <img src="../../../../assets/img/8.jpg" class="rounded-circle" alt="abc"><br>
 		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
 			   <span>
 			<i class="fa fa-star col_yell"></i>
@@ -322,14 +349,14 @@
 			<i class="fa fa-star col_yell"></i>
 			<i class="fa fa-star-half-o col_yell"></i>
 			</span>		
-			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<p class="mt-3">{{listCourse.data.reviews[0].comment}}</p>	
 			<h5>Nulla Quis</h5> 
 			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
 		  </div>
 		 </div>
 		 <div class="col-md-6">
 		  <div class="testim_1i1  p-4 rounded_10 border_1 text-center">
-		        <img src="img/11.jpg" class="rounded-circle" alt="abc"><br>
+		        <img src="../../../../assets/img/11.jpg" class="rounded-circle" alt="abc"><br>
 		       <span class="bg_green span_1 text-white rounded-circle d-inline-block text-center mt-3 mb-3"><i class="fa fa-quote-left"></i></span>	<br>
 			   <span>
 			<i class="fa fa-star col_yell"></i>
@@ -338,7 +365,7 @@
 			<i class="fa fa-star col_yell"></i>
 			<i class="fa fa-star-half-o col_yell"></i>
 			</span>		
-			<p class="mt-3">Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make type specimen book has survived not five centuries but also the leap into electronic.</p>	
+			<p class="mt-3">{{listCourse.data.reviews[1].comment}}</p>	
 			<h5>Semp Porta</h5> 
 			<h6 class="mb-0 col_green">Product Designer, USA</h6> 
 		  </div>
@@ -395,14 +422,19 @@
 	<div class="col-md-4">
 	 <div class="course_dt1r">
 	   <div class="course_dt1r1 bg_light p-4 border_1 rounded_10">
-	    <h3 class="col_green text-center">$460.48</h3><hr>
-		<h6><i class="fa fa-user me-1 col_green"></i> Instructor <span class="pull-right text-muted">Nulla Augue</span></h6><hr>
-		<h6><i class="fa fa-clock-o me-1 col_green"></i> Duration <span class="pull-right text-muted">06 hr 17 mins</span></h6><hr>
-		<h6><i class="fa fa-play-circle me-1 col_green"></i> Lectures <span class="pull-right text-muted">26</span></h6><hr>
+		<h3 class="col_green text-center" *ngIf="listCourse.data.price === 0 || listCourse.data.price === null; else showPrice">FREE</h3>
+			<ng-template #showPrice>
+			<h3 class="col_green text-center" >{{ listCourse.data.price | currency:'VND' }}</h3>
+			</ng-template>
+
+		<hr>
+		<h6><i class="fa fa-user me-1 col_green"></i> Instructor <span class="pull-right text-muted">{{listCourse.data.instructor}}</span></h6><hr>
+		<h6><i class="fa fa-clock-o me-1 col_green"></i> Duration <span class="pull-right text-muted">{{listCourse.data.timeCourse}}</span></h6><hr>
+		<h6><i class="fa fa-play-circle me-1 col_green"></i> Lectures <span class="pull-right text-muted">{{listCourse.data.lectures}}</span></h6><hr>
 		<h6><i class="fa fa-bars me-1 col_green"></i> Level <span class="pull-right text-muted">Secondary</span></h6><hr>
-		<h6><i class="fa fa-book me-1 col_green"></i> Language <span class="pull-right text-muted">English</span></h6><hr>
-		<h6 class="mb-0"><i class="fa fa-certificate me-1 col_green"></i> Certificate <span class="pull-right text-muted">Yes</span></h6><hr>
-		<h6 class="mb-0 text-center mt-4"><a class="button_1" href="#">Enroll Now</a></h6>
+		<h6><i class="fa fa-book me-1 col_green"></i> Language <span class="pull-right text-muted">{{listCourse.data.language}}</span></h6><hr>
+		<h6 class="mb-0"><i class="fa fa-certificate me-1 col_green"></i> Certificate <span class="pull-right text-muted">{{listCourse.data.certificate}}</span></h6><hr>
+		<h6 class="mb-0 text-center mt-4"><a class="button_1" (click)="payment(listCourse.data.price)">Buy Now</a></h6>
 	   </div>
 	   <div class="course_dt1r2 mt-4">
 	  <h4>Share Course:</h4>

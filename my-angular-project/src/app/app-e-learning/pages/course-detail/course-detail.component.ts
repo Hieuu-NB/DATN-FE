@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from '../../store/app.service';
+import { FormBuilder } from '@angular/forms';
+import { AuthService } from 'src/app/core/auth.service';
+import Swal from 'sweetalert2';
+import { UserCourseName } from '../../store/models/user.model';
 
 @Component({
   selector: 'app-course-detail',
@@ -7,14 +12,122 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseDetailComponent implements OnInit {
 
-  courseName: string = '';
   info= 'info@gmail.com';
-  constructor(private route: ActivatedRoute) {}
+
+  courseName: string = '';
+
+  listCourse: any;
+
+  userName: string = ''; // Tên của user
+
+  userRoles: string[] = []; // Mảng chứa các role của user
+
+  // UserCourseName: any;
+  userCourseName = new UserCourseName();
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private renderer: Renderer2, 
+    private el: ElementRef,
+    private appservice: AppService,
+    private fb: FormBuilder,
+    private router:Router,
+    private authService: AuthService
+  ) {}
+
+ 
 
   ngOnInit() {
+    this.userRoles = this.authService.getUserRoles(); // Lấy role của user từ token
+    this.userName = this.authService.getUserName();  // Lấy tên của user từ token
+    
     this.route.queryParams.subscribe(params => {
       this.courseName = params['courseName']; // Lấy giá trị courseName
       console.log('Course Name:', this.courseName);
     });
+
+    this.listCourse = this.appservice.loadCourseByName(this.courseName).subscribe(
+      (data) => {
+        this.listCourse = data;
+        
+        console.log("listCourse :"+this.listCourse.data.price);
+        
+
+      }
+    );
+
+  }
+
+
+
+  payment( price: any) {
+
+    console.log(price);
+    
+    if(this.listCourse.data.price === 0 || this.listCourse.data.price === '0' || this.listCourse.data.price === null){
+    
+      this.userCourseName.username = this.userName;
+      this.userCourseName.course_name = this.courseName;
+      this.appservice.addCourseForUser(this.userCourseName).subscribe(
+      (data) => {
+        console.log(data);
+        
+        if(data.status === 200){        
+            Swal.fire({
+              icon: 'success',
+              title: 'Mua khóa học thành công!',
+              text: 'Chào mừng bạn đến với khóa học !',
+              confirmButtonText: 'Tiếp tục',
+            });
+            this.router.navigate(['home']);
+          }else{
+            Swal.fire({
+              icon: 'info',
+              title: data.message,
+              text: 'Vui lòng thử lại sau!',
+              confirmButtonText: 'Tiếp tục',
+            });
+            this.router.navigate(['home']);
+          }
+
+    });
+  } 
+  else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Mua khóa học thất bại!',
+      text: 'Vui lòng thử lại sau!',
+      confirmButtonText: 'Tiếp tục',
+    });
+    this.router.navigate(['payment']);
+  }
+}
+
+
+  
+  viewProfile() { // Chuyển hướng đến trang profile
+    this.router.navigate(['profile']);
+  }
+  editProfile() { // Chuyển hướng đến trang edit profile
+    this.router.navigate(['edit-profile']);
+  }
+
+  isLoggedIn(): boolean {  // Kiểm tra xem user đã đăng nhập chưa
+    return this.userRoles.length <= 0; // Nếu có ít nhất 1 role thì user đã đăng nhập
+  }
+
+  hasRole(role: string): boolean { // Kiểm tra xem user có role đó không
+    return this.userRoles.includes(role); 
+  }
+
+  signUp(){ // Chuyển hướng đến trang đăng ký
+    this.router.navigate(['sign-up']);
+  }
+  signIn(){ // Chuyển hướng đến trang đăng nhập
+    this.router.navigate(['sign-in']);
+  }
+  logout(){ // Đăng xuất
+    this.authService.logout();
   }
 }

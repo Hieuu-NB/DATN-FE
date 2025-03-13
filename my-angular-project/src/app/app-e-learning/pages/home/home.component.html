@@ -132,6 +132,7 @@ body.modal-open {
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	   <ul class="navbar-nav mb-0 ms-auto">
 	    
@@ -178,18 +179,39 @@ body.modal-open {
 
 				
       </ul>
+
+      
+
       <ul *ngIf="isLoggedIn()" class="navbar-nav mb-0 ms-auto">
 	   <li class="nav-item">
-          <a class="nav-link" (click)="signUp()">Sign In</a>
+          <a class="nav-link" (click)="signIn()">Sign In</a>
         </li>
 		<li class="nav-item">
-          <a class="nav-link button" (click)="signIn()">Sign Up</a>
+          <a class="nav-link button" (click)="signUp()">Sign Up</a>
         </li>
       </ul>
 
-<!-- sau sẽ code thêm Phần xin chào có tên user các thứ, thay chỗ cho login/sign in -->
+      <ul  *ngIf="!isLoggedIn()" class="navbar-nav mb-0 ms-auto">
+		<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrY7dJj0QnImGcypj9oBdr9u9joHrxgaKY_g&s" class="rounded-circle me-2" width="32" height="25" alt="User Avatar">
+                <span>Xin chào, {{ userName }}</span>
+              </a>
+          <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
+            <li ><a class="dropdown-item" (click)="myCourse()">🎓  Khóa học của tôi</a></li>
+            <li ><a class="dropdown-item" (click)="viewProfile()">👤 Thông tin cá nhân</a></li>
+              <li><a class="dropdown-item" (click)="editProfile()">⚙️ Chỉnh sửa thông tin</a></li>
+              <li><a class="dropdown-item text-danger"  (click)="logout()">🚪 Đăngxuất</a></li>
+          </ul>
+        </li>
+      </ul>
+
 
     </div>
+
+
+
+
   </div>
 </nav>
 </section>

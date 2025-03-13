@@ -6,6 +6,7 @@ import { HomeComponent } from './app-e-learning/pages/home/home.component';
 import { UnauthorizedComponent } from './app-e-learning/pages/unauthorized/unauthorized.component';
 import { SignUpComponent } from './app-e-learning/pages/sign-up/sign-up.component';
 import { CourseDetailComponent } from './app-e-learning/pages/course-detail/course-detail.component';
+import { MyCourseComponent } from './app-e-learning/pages/my-course/my-course.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'course-detail', component: CourseDetailComponent },
+  { path: 'my-course', component: MyCourseComponent },
 ];
 
 @NgModule({

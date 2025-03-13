@@ -13,10 +13,11 @@ import { SignUpModule } from './app-e-learning/pages/sign-up/sign-up.module';
 import { HomeModule } from './app-e-learning/pages/home/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CourseDetailModule } from './app-e-learning/pages/course-detail/course-detail.module';
+import { MyCourseModule } from './app-e-learning/pages/my-course/my-course.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { CourseDetailModule } from './app-e-learning/pages/course-detail/course-
     SignUpModule,
     HomeModule,
     NgbModule,
-    CourseDetailModule
+    CourseDetailModule,
+    MyCourseModule
   ],
   providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true }],
   bootstrap: [AppComponent]

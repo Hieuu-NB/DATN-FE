@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { ListTruyen } from "../models/truyen.model";
-import { User, UserRegister } from "./models/user.model";
+import { User, UserCourseName, UserName, UserRegister } from "./models/user.model";
 
 @Injectable({
     providedIn: 'any',
@@ -31,7 +30,28 @@ export class AppService {
 
     loadAllCourse(){
       return this.http.get<any>(
-        'http://localhost:9002/course-service/file/listCourse'
+        'http://localhost:9002/course-service/course/listCourse'
+      );
+    }
+
+
+    loadCourseByName(nameCourse: any) {
+      return this.http.get<any>(
+        `http://localhost:9002/course-service/course/show-course-detail-by-name/${nameCourse}`
+      );
+    }
+
+    addCourseForUser(user: UserCourseName){
+      return this.http.post<any>(
+        'http://localhost:1223/authorization-service/add-course-for-user',
+        user
+      );
+    }
+    
+    loadMyCourseByUserName(userName: UserName) {
+      return this.http.post<any>(
+        `http://localhost:1223/authorization-service/show-my-course`,
+        userName
       );
     }
 }

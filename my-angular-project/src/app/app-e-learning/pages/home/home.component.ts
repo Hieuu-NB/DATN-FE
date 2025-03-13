@@ -4,7 +4,6 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 declare var bootstrap: any;
-// import * as bootstrap from 'bootstrap'; // Import Bootstrap JS
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
@@ -20,10 +19,9 @@ export class HomeComponent implements OnInit {
   courseBusiness: any[] = [];
 
 
-
-
-
   userRoles: string[] = []; // Mảng chứa các role của user
+  userName: string = ''; // Tên của user
+
   constructor(
       private renderer: Renderer2, 
       private el: ElementRef,
@@ -33,7 +31,9 @@ export class HomeComponent implements OnInit {
       private authService: AuthService
     ) { }
   ngOnInit(): void { 
-    this.userRoles = this.authService.getUserRoles();
+    this.userRoles = this.authService.getUserRoles(); // Lấy role của user từ token
+    this.userName = this.authService.getUserName();  // Lấy tên của user từ token
+
 
     this.listCourse = this.appservice.loadAllCourse().subscribe(
       (data) => {
@@ -70,7 +70,9 @@ export class HomeComponent implements OnInit {
     
     console.log('User Roles:', this.userRoles); // Kiểm tra log user roles
   }
-
+  myCourse() { // Chuyển hướng đến trang my course
+    this.router.navigate(['my-course']);
+  }
 
   ngAfterViewInit() { // Xử lý modal
     const modals = document.querySelectorAll('.modal');
@@ -112,24 +114,33 @@ export class HomeComponent implements OnInit {
     }
 }
 
+viewProfile() { // Chuyển hướng đến trang profile
+  this.router.navigate(['profile']);
+}
+editProfile() { // Chuyển hướng đến trang edit profile
+  this.router.navigate(['edit-profile']);
+}
+
 
 openCourseDetail(courseName: string) {  
   this.router.navigate(['course-detail'], { queryParams: { courseName } });
 }
     
-  isLoggedIn(): boolean {  // Kiểm tra xem user đã đăng nhập chưa
-    return this.userRoles.length <= 0; // Nếu có ít nhất 1 role thì user đã đăng nhập
-  }
+isLoggedIn(): boolean {  // Kiểm tra xem user đã đăng nhập chưa
+  return this.userRoles.length <= 0; // Nếu có ít nhất 1 role thì user đã đăng nhập
+}
 
-  hasRole(role: string): boolean { // Kiểm tra xem user có role đó không
-    return this.userRoles.includes(role); 
-  }
+hasRole(role: string): boolean { // Kiểm tra xem user có role đó không
+  return this.userRoles.includes(role); 
+}
 
-  signUp(){ // Chuyển hướng đến trang đăng ký
-    this.router.navigate(['sign-up']);
-  }
-  signIn(){ // Chuyển hướng đến trang đăng nhập
-    this.router.navigate(['sign-in']);
-  }
-  
+signUp(){ // Chuyển hướng đến trang đăng ký
+  this.router.navigate(['sign-up']);
+}
+signIn(){ // Chuyển hướng đến trang đăng nhập
+  this.router.navigate(['sign-in']);
+}
+logout(){ // Đăng xuất
+  this.authService.logout();
+}
 }

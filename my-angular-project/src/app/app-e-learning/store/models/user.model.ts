@@ -11,3 +11,11 @@ export class UserRegister {
     role!: any;
 }
 
+export class UserCourseName {
+    username!: string;
+    course_name!: string;
+  }
+
+export class UserName {
+    username!: string;
+}
