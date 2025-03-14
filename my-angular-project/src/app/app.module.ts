@@ -14,6 +14,8 @@ import { HomeModule } from './app-e-learning/pages/home/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CourseDetailModule } from './app-e-learning/pages/course-detail/course-detail.module';
 import { MyCourseModule } from './app-e-learning/pages/my-course/my-course.module';
+import { AdminModule } from './app-e-learning/pages/admin/admin.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MyCourseModule } from './app-e-learning/pages/my-course/my-course.modul
     HomeModule,
     NgbModule,
     CourseDetailModule,
-    MyCourseModule
+    MyCourseModule,
+    AdminModule,
+    NgxPaginationModule
   ],
   providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true }],
   bootstrap: [AppComponent]

@@ -7,6 +7,8 @@ import { UnauthorizedComponent } from './app-e-learning/pages/unauthorized/unaut
 import { SignUpComponent } from './app-e-learning/pages/sign-up/sign-up.component';
 import { CourseDetailComponent } from './app-e-learning/pages/course-detail/course-detail.component';
 import { MyCourseComponent } from './app-e-learning/pages/my-course/my-course.component';
+import { QRCodeComponent } from 'angularx-qrcode';
+import { AdminComponent } from './app-e-learning/pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +19,10 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'course-detail', component: CourseDetailComponent },
   { path: 'my-course', component: MyCourseComponent },
+  { path: 'qr-code', component: QRCodeComponent },
+  { path: 'admin',component: AdminComponent,canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'unauthorized',component: UnauthorizedComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+
 ];
 
 @NgModule({

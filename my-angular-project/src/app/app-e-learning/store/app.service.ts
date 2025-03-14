@@ -9,6 +9,21 @@ import { User, UserCourseName, UserName, UserRegister } from "./models/user.mode
 export class AppService {
     constructor(private http: HttpClient) {}
   
+
+    loadAllUsers(){ // load table Users ra 
+      return this.http.get<any>(
+        'http://localhost:1223/authorization-service/show-all-user'
+      );
+    }
+
+    loadAllUsersAndCourse(){ // load table Users ra và cả các khóa học user đã đăng kí
+      return this.http.get<any>(
+        'http://localhost:1223/authorization-service/show-all-user-and-course'
+      );
+    }
+
+
+
     login_by_user(user: User){
       return this.http.post<any>(
         'http://localhost:1223/authorization-service/login',

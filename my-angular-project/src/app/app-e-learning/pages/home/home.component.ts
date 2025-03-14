@@ -114,8 +114,13 @@ export class HomeComponent implements OnInit {
     }
 }
 
+openAdmin() { // Chuyển hướng đến trang admin
+  this.router.navigate(['admin']);
+}
+
+
 viewProfile() { // Chuyển hướng đến trang profile
-  this.router.navigate(['profile']);
+  this.router.navigate(['qr-code']);
 }
 editProfile() { // Chuyển hướng đến trang edit profile
   this.router.navigate(['edit-profile']);

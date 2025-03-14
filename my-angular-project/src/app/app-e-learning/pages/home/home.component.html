@@ -198,6 +198,7 @@ body.modal-open {
                 <span>Xin chào, {{ userName }}</span>
               </a>
           <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
+            <li *ngIf="hasRole('ADMIN')" ><a class="dropdown-item" (click)="openAdmin()">🖥  Trang quản trị</a></li>
             <li ><a class="dropdown-item" (click)="myCourse()">🎓  Khóa học của tôi</a></li>
             <li ><a class="dropdown-item" (click)="viewProfile()">👤 Thông tin cá nhân</a></li>
               <li><a class="dropdown-item" (click)="editProfile()">⚙️ Chỉnh sửa thông tin</a></li>
@@ -718,7 +719,7 @@ body.modal-open {
                             <div class="col-md-4 col-4">
                                 <div class="course_h3i1ir text-end pt-2">
                                     <h6 class="font_14">
-                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                        <a class="button_1 p-2 px-3" href="#">{{course.content}}</a>
                                     </h6>
                                 </div>
                             </div>
@@ -807,7 +808,7 @@ body.modal-open {
                             <div class="col-md-4 col-4">
                                 <div class="course_h3i1ir text-end pt-2">
                                     <h6 class="font_14">
-                                        <a class="button_1 p-2 px-3" href="#">Science 1</a>
+                                        <a class="button_1 p-2 px-3" href="#">{{course.content}}</a>
                                     </h6>
                                 </div>
                             </div>
@@ -1608,3 +1609,5 @@ function myFunction() {
 </body>
 
 </html>
+
+

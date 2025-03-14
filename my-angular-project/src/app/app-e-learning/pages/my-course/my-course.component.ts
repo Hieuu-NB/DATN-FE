@@ -45,6 +45,10 @@ export class MyCourseComponent implements OnInit {
     );
   }
   
+  openAdmin() { // Chuyển hướng đến trang admin
+    this.router.navigate(['admin']);
+  }
+  
   openLearning(){
     this.router.navigate(['course-learning']);
   }
