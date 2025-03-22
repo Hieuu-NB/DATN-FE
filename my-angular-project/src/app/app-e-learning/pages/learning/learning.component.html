@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Học - Elearning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #4CAF50; /* Màu xanh lá cây */
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.header .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    margin: 0 20px;
+}
+
+.header .search-bar input {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    font-size: 14px;
+    outline: none;
+}
+
+.header .search-bar button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #45a049; /* Màu xanh lá cây đậm hơn */
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .search-bar button:hover {
+    background-color: #3d8b40; /* Màu xanh lá cây đậm hơn khi hover */
+}
+
+.header .user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.header .user-menu .username {
+    font-size: 14px;
+    color: #fff;
+}
+
+.header .user-menu i {
+    font-size: 20px;
+    color: #fff;
+}
+/* Main Content */
+.main-content {
+    flex: 3;
+    padding: 20px;
+}
+.video-player {
+  width: 987px; /* Chiều rộng cố định */
+  height: 550px; /* Chiều cao cố định */
+  background-color: #000; /* Màu nền cho video */
+  border-radius: 10px; /* Bo góc */
+  overflow: hidden; /* Ẩn phần nội dung vượt quá kích thước */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Khoảng cách với phần tử bên dưới */
+}
+
+.video-player video {
+  width: 100%; /* Video chiếm toàn bộ chiều rộng của container */
+  height: 100%; /* Video chiếm toàn bộ chiều cao của container */
+  object-fit: cover; /* Mặc định: hiển thị đầy đủ video, có thể cắt bớt phần thừa */
+}
+
+/* Class để xử lý video có độ ngang nhỏ hơn 500px */
+.video-player.small-video video {
+  object-fit: contain; /* Hiển thị đầy đủ video, có thể có khoảng trống */
+}
+
+
+
+
+.video-info {
+    margin-top: 20px;
+}
+
+.video-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.video-info p {
+    font-size: 16px;
+    color: #666;
+}
+
+.video-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.video-actions .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Màu xanh lá cây */
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.video-actions .btn:hover {
+    background-color: #45a049; /* Màu xanh lá cây đậm hơn */
+}
+/* Tabs */
+.tabs {
+  margin-top: 20px;
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-link {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.tab-link.active {
+  color: #4CAF50; /* Màu xanh lá cây */
+  border-bottom: 2px solid #4CAF50;
+}
+
+.tab-content {
+  padding: 20px 0;
+}
+
+.tab-pane {
+  display: none; /* Ẩn tất cả các tab pane mặc định */
+}
+
+.tab-pane.active {
+  display: block; /* Hiển thị tab pane được chọn */
+}
+/* Sidebar */
+.sidebar {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h3 {
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.sidebar-header i {
+    cursor: pointer;
+    color: #666;
+}
+
+.lecture-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lecture-item {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    /* display: flex;
+    justify-content: space-between; */
+    align-items: center;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: inherit;
+}
+
+.lecture-item.active {
+    border-color: #4CAF50; /* Màu xanh lá cây */
+    background-color: #e8f5e9; /* Màu xanh lá cây nhạt */
+}
+
+.lecture-item:hover {
+    background-color: #f1f1f1;
+}
+
+.lecture-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.lecture-duration {
+    color: #888;
+    font-size: 14px;
+}
+.user-menu {
+  position: relative;
+  display: inline-block;
+  background-color: #28a745; /* Màu nền xanh lá cây */
+  color: white; /* Màu chữ trắng */
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f0f8f0; /* Màu nền xanh lá cây nhạt */
+  min-width: 280px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%;
+  left: -50px;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: #333; /* Màu chữ đen xám */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e0eee0; /* Màu nền xanh lá cây nhạt hơn khi hover */
+}
+
+.user-menu:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a i {
+  margin-right: 8px;
+}
+    </style>
+   
+  
+</head>
+<body>
+   <!-- Header -->
+   <header class="header">
+    <div class="logo"><i class="fa fa-book me-1 col_white"></i> Online Learning    </div>
+    <!-- <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm bài giảng..." />
+        <button><i class="fas fa-search"></i></button>
+    </div> -->
+    <div class="search-bar">
+        <div> {{courseName}}
+        </div>
+    </div>
+    <!-- <div class="user-menu">
+        <span class="username">Người học</span>
+        <i class="fas fa-user-circle"></i>
+      </div> -->
+      <div class="user-menu">
+        <span class="username">Xin chào {{userName}}</span>
+        <i class="fas fa-user-circle"></i>
+        <div class="dropdown-content" >
+          <a (click)="hoHome()"><i style="color: #3d8b40;" class="fas fa-user"></i> Trang chủ</a>
+          <a (click)="myCourse()"><i style="color: #3d8b40;" class="fas fa-cog"></i> Khóa học của tôi</a>
+          <a (click)="logout()"><i style="color: #3d8b40;" class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </div>
+      </div>
+    
+</header>
+
+    <div class="container">
+      
+
+       <!-- Main Content -->
+  <div class="main-content">
+    <!-- Video Player -->
+    <div class="video-player">
+      <video [src]="selectedLecture.videoUrl" controls>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Video Info -->
+    <div class="video-info">
+      <h1>{{ selectedLecture.title }}</h1>
+      <p>{{ selectedLecture.description }}</p>
+      <div class="video-actions">
+        <button class="btn"><i class="fas fa-thumbs-up"></i> Thích</button>
+        <button class="btn"><i class="fas fa-share"></i> Chia sẻ</button>
+        <button class="btn"><i class="fas fa-download"></i> Tải xuống</button>
+      </div>
+    </div>
+
+            <!-- Tabs (Nội dung, Bình luận, Tài liệu) -->
+<div class="tabs">
+    <!-- Tab Header -->
+    <div class="tab-header">
+      <button
+        class="tab-link"
+        [class.active]="activeTab === 'content'"
+        (click)="switchTab('content')"
+      >
+        Nội dung
+      </button>
+      <button
+        class="tab-link"
+        [class.active]="activeTab === 'comments'"
+        (click)="switchTab('comments')"
+      >
+        Bình luận
+      </button>
+      <button
+        class="tab-link"
+        [class.active]="activeTab === 'resources'"
+        (click)="switchTab('resources')"
+      >
+        Tài liệu
+      </button>
+    </div>
+  
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <div *ngIf="activeTab === 'content'">
+        <p>Nội dung chi tiết của bài giảng.</p>
+      </div>
+      <div *ngIf="activeTab === 'comments'">
+        <p>Bình luận từ người học.</p>
+      </div>
+      <div *ngIf="activeTab === 'resources'" >
+        <p>Tài liệu tham khảo và file đính kèm.</p>
+      </div>
+    </div>
+  </div>
+
+    </div>
+
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <div class="sidebar-header">
+                <h3>Danh sách bài giảng</h3>
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+            
+            <div *ngFor="let lecture of lectures ;let i = index" class="lecture-list">
+                <a
+                  href="#lecture-{{lecture.orderIndex}}"
+                  class="lecture-item"
+                  [class.active]="lecture.orderIndex === selectedLecture.orderIndex"
+                  (click)="selectLecture(lecture, $event)" 
+                >
+                  <span class="lecture-title">Bài giảng {{i+1}} {{ lecture.title }}</span>
+                  <br>
+                  <span class="lecture-duration">{{ lecture.description }}</span>
+                </a>
+              </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+      const tabLinks = document.querySelectorAll('.tab-link');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      // Hàm chuyển đổi tab
+      function switchTab(event) {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+        // Lấy id của tab được chọn từ href
+        const targetId = this.getAttribute('href').substring(1);
+
+        // Ẩn tất cả các tab pane
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        // Hiển thị tab pane được chọn
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) {
+          targetPane.classList.add('active');
+        }
+
+        // Xóa class active khỏi tất cả các tab link
+        tabLinks.forEach(link => link.classList.remove('active'));
+
+        // Thêm class active vào tab link được chọn
+        this.classList.add('active');
+      }
+
+      // Gắn sự kiện click cho các tab link
+      tabLinks.forEach(link => link.addEventListener('click', switchTab));
+    });
+       
+
+
+
+// Xử lý chuyển đổi bài giảng
+document.querySelectorAll('.lecture-item').forEach(item => {
+    item.addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định
+        document.querySelectorAll('.lecture-item').forEach(lecture => lecture.classList.remove('active'));
+        this.classList.add('active');
+
+        // Cập nhật video và thông tin (giả lập)
+        const videoTitle = this.querySelector('.lecture-title').textContent;
+        document.getElementById('video-title').textContent = videoTitle;
+    });
+});
+    </script>
+</body>
+</html>
+
+
+
+
+

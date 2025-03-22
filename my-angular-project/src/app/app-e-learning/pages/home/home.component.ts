@@ -117,6 +117,9 @@ export class HomeComponent implements OnInit {
 openAdmin() { // Chuyển hướng đến trang admin
   this.router.navigate(['admin']);
 }
+openTeacherPage() { // Chuyển hướng đến trang teacher page
+  this.router.navigate(['teacher-page']);
+}
 
 
 viewProfile() { // Chuyển hướng đến trang profile

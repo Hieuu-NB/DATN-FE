@@ -49,9 +49,13 @@ export class MyCourseComponent implements OnInit {
     this.router.navigate(['admin']);
   }
   
-  openLearning(){
-    this.router.navigate(['course-learning']);
+  
+  openLearning(courseName: string) {
+    this.router.navigate(['learning-page'], {
+      queryParams: { courseName: courseName }
+    });
   }
+  
 
 
   viewProfile() { // Chuyển hướng đến trang profile

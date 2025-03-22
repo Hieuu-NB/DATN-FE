@@ -16,6 +16,9 @@ import { CourseDetailModule } from './app-e-learning/pages/course-detail/course-
 import { MyCourseModule } from './app-e-learning/pages/my-course/my-course.module';
 import { AdminModule } from './app-e-learning/pages/admin/admin.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LearningModule } from './app-e-learning/pages/learning/learning.module';
+import { TeacherPageComponent } from './app-e-learning/pages/teacher-page/teacher-page.component';
+import { TeacherPageModule } from './app-e-learning/pages/teacher-page/teacher-page.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CourseDetailModule,
     MyCourseModule,
     AdminModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    LearningModule,
+    TeacherPageModule
   ],
   providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true }],
   bootstrap: [AppComponent]

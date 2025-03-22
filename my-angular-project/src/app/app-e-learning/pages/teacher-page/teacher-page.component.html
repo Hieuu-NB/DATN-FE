@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+         /* Header */
+         .header {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 15px 25px;
+         background-color: #4CAF50; /* Màu xanh lá cây */
+         color: #fff;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         position: sticky;
+         top: 0;
+         z-index: 1000;
+         }
+         .header .logo {
+         font-size: 20px;
+         font-weight: bold;
+         color: #fff;
+         }
+         .header .search-bar {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         flex: 1;
+         margin: 0 20px;
+         }
+         .header .search-bar input {
+         padding: 8px 12px;
+         border: none;
+         border-radius: 20px;
+         width: 100%;
+         max-width: 400px;
+         font-size: 14px;
+         outline: none;
+         }
+         .header .search-bar button {
+         padding: 8px 12px;
+         border: none;
+         border-radius: 20px;
+         background-color: #45a049; /* Màu xanh lá cây đậm hơn */
+         color: #fff;
+         cursor: pointer;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         }
+         .header .search-bar button:hover {
+         background-color: #3d8b40; /* Màu xanh lá cây đậm hơn khi hover */
+         }
+         .header .user-menu {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         cursor: pointer;
+         }
+         .header .user-menu .username {
+         font-size: 14px;
+         color: #fff;
+         }
+         .header .user-menu i {
+         font-size: 20px;
+         color: #fff;
+         }
+         /* Container chính */
+         .container {
+         display: flex;
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 20px;
+         background-color: #f0f8ff; /* Màu xanh nhạt */
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+         /* Phần upload khóa học và bài học */
+         .upload-section {
+         flex: 3;
+         padding: 20px;
+         background-color: #fff;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+         .upload-section h2 {
+         margin-top: 0;
+         color: #2c3e50;
+         }
+         .upload-section form div {
+         margin-bottom: 15px;
+         }
+         .upload-section label {
+         display: block;
+         margin-bottom: 5px;
+         font-weight: bold;
+         color: #333;
+         }
+         .upload-section input[type="text"],
+         .upload-section textarea,
+         .upload-section select,
+         .upload-section input[type="file"] {
+         width: 100%;
+         padding: 8px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         }
+         .upload-section button {
+         padding: 10px 20px;
+         background-color: #4CAF50; /* Màu xanh lá cây */
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         }
+         .upload-section button:hover {
+         background-color: #45a049;
+         }
+         /* Navbar bên phải */
+         .navbar {
+         flex: 1;
+         margin-left: 20px;
+         padding: 20px;
+         background-color: #fff;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+         .navbar h2 {
+         margin-top: 0;
+         color: #2c3e50;
+         }
+         .navbar ul {
+         list-style-type: none;
+         padding: 0;
+         }
+         .navbar ul li {
+         padding: 10px;
+         background-color: #f0f8ff; /* Màu xanh nhạt */
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         margin-bottom: 10px;
+         cursor: pointer;
+         }
+         .navbar ul li:hover {
+         background-color: #e0f0ff; /* Màu xanh nhạt đậm hơn */
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Header -->
+      <!-- <header class="header">
+         <div class="logo"><i class="fa fa-book me-1 col_white"></i> Online Learning    </div>
+        
+         <div class="search-bar">
+            <div>Complete Java SE 8 Developer Bootcamp - OCA Prep Included
+            </div>
+         </div>
+         <div class="user-menu">
+            <span class="username">Người học</span>
+            <i class="fas fa-user-circle"></i>
+         </div>
+      </header> -->
+      <!--  -->
+      <!DOCTYPE html>
+      <html lang="en">
+         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Admin Panel</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <style>
+               body {
+               background-color: #f4f4f4;
+               }
+               .wrapper {
+               display: flex;
+               }
+               .sidebar {
+               width: 250px;
+               background: #28a745;
+               color: white;
+               height: 100vh;
+               padding: 20px;
+               position: fixed;
+               }
+               .sidebar a {
+               color: white;
+               display: block;
+               padding: 10px;
+               text-decoration: none;
+               border-radius: 5px;
+               margin-bottom: 10px;
+               }
+               .sidebar a:hover, .sidebar a.active {
+               background: #218838;
+               }
+               .content {
+               margin-left: 270px;
+               padding: 20px;
+               width: 100%;
+               }
+               .table-container {
+               background: white;
+               padding: 20px;
+               border-radius: 10px;
+               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+               }
+               .table th {
+               background-color: #28a745;
+               color: white;
+               }
+               .table td {
+               vertical-align: middle;
+               }
+               .avatar {
+               width: 50px;
+               height: 50px;
+               border-radius: 50%;
+               object-fit: cover;
+               }
+               .btn-action {
+               width: 40px;
+               height: 40px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               border-radius: 50%;
+               }
+               .role-select {
+               width: 100%;
+               padding: 5px;
+               border-radius: 5px;
+               }
+               /* popup */
+               .avatar {
+               width: 50px;
+               height: 50px;
+               border-radius: 50%;
+               object-fit: cover;
+               }
+               .action-buttons {
+               display: flex;
+               gap: 5px;
+               }
+               .btn-icon {
+               width: 40px;
+               height: 40px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               }
+               .modal-header {
+               background: #007bff;
+               color: white;
+               }
+               .modal-header .close {
+               color: white;
+               font-size: 1.5rem;
+               }
+               .modal-title {
+               font-weight: bold;
+               }
+               .modal-footer {
+               justify-content: center;
+               }
+               .btn-close-lg {
+               font-size: 2rem; /* Tăng kích thước */
+               font-weight: bold;
+               color: white;
+               background: none;
+               border: none;
+               cursor: pointer;
+               transition: 0.3s;
+               }
+               .btn-close-lg:hover {
+               color: #ff4d4d;
+               transform: scale(1.2); /* Hiệu ứng phóng to khi hover */
+               }
+               /* btn delete course */
+               .list-group-item {
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               }
+               .course-name {
+               flex-grow: 1; /* Đẩy icon về bên phải */
+               }
+               .btn-sm {
+               padding: 5px 8px;
+               }
+               /* // course */
+               .modal-content {
+               width: 100%;
+               max-width: 600px;
+               padding: 20px;
+               background: white;
+               border-radius: 10px;
+               }
+               .course-info p {
+               margin: 5px 0;
+               }
+               .video-container iframe {
+               width: 100%;
+               height: 300px;
+               border-radius: 10px;
+               }
+               .video-list {
+               max-height: 200px;
+               overflow-y: auto;
+               }
+               .video-item {
+               cursor: pointer;
+               padding: 10px;
+               transition: background 0.2s;
+               }
+               .video-item:hover {
+               background: #f0f0f0;
+               }
+               .video-item.active {
+               background: #007bff;
+               color: white;
+               }
+
+
+               /* upload lessson */
+               /* Form container */
+#lesson-form {
+  width: 850px;
+  /* margin: 0 auto; */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Input fields */
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+}
+
+/* File input */
+input[type="file"].form-control {
+  padding: 0.5rem;
+}
+
+/* Submit button */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Small text for hints */
+.form-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+/* CSS cho nút button */
+.btn-green {
+  background-color: #28a745; /* Màu xanh lá cây */
+  border: none;
+  color: white; /* Màu chữ trắng */
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hiệu ứng khi hover */
+.btn-green:hover:not(:disabled) {
+  background-color: #218838; /* Màu xanh lá cây đậm hơn khi hover */
+  transform: translateY(-1px); /* Di chuyển nút lên trên một chút */
+}
+
+/* Hiệu ứng khi nhấn (active) */
+.btn-green:active:not(:disabled) {
+  background-color: #1e7e34; /* Màu xanh lá cây đậm hơn khi nhấn */
+  transform: translateY(0); /* Đưa nút về vị trí ban đầu */
+}
+
+/* Nút bị vô hiệu hóa */
+.btn-green:disabled {
+  background-color: #6c757d; /* Màu xám khi nút bị vô hiệu hóa */
+  cursor: not-allowed;
+}
+
+
+
+
+/* ds lesson */
+/* Container chứa hai cột */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Cột bên trái (phần tìm kiếm và upload) */
+.left-panel {
+  flex: 1;
+  max-width: 500px;
+}
+
+/* Cột bên phải (phần hiển thị bài học) */
+.right-panel {
+  flex: 2;
+}
+
+/* Danh sách bài học */
+.lesson-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Component bài học */
+.lesson-card {
+  width: 315px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh thumbnail bài học */
+.lesson-thumbnail img {
+  width: 100px;
+  height: 60px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Chi tiết bài học */
+.lesson-details {
+  flex: 1;
+}
+
+.lesson-details h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.lesson-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.lesson-details small {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+
+/* vòng quay chờ load api */
+/* Nền mờ full màn hình */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Làm mờ nền */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Nội dung modal */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Hiệu ứng loading */
+.spinner {
+  margin: 0 auto;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #007bff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ds course da upload */
+/* Tiêu đề trang */
+.course-management-title {
+    color: #28a745; /* Màu xanh lá cây */
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Bảng danh sách khóa học */
+.course-management-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header của bảng */
+.course-management-table th {
+    background-color: #28a745; /* Màu xanh lá cây */
+    color: white;
+    font-weight: bold;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Các ô trong bảng */
+.course-management-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Màu viền nhạt */
+}
+
+/* Hiệu ứng hover cho các dòng */
+.course-row:hover {
+    background-color: #f1f1f1; /* Màu nền khi hover */
+}
+
+/* Trạng thái khóa học */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.status.approve {
+    background-color: #28a745; /* Màu xanh lá cây */
+}
+
+.status.pending {
+    background-color: #ffc107; /* Màu vàng */
+}
+
+.status.reject {
+    background-color: #dc3545; /* Màu đỏ */
+}
+
+/* Dropdown chọn trạng thái */
+.status-select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Màu viền nhạt */
+    background-color: white;
+    color: #333; /* Màu chữ chính */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.status-select:hover {
+    border-color: #28a745; /* Màu xanh lá cây khi hover */
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #28a745; /* Màu xanh lá cây khi focus */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Hiệu ứng shadow */
+}
+            </style>
+         </head>
+         <body>
+            <div class="wrapper">
+               <!-- Sidebar -->
+               <nav class="sidebar">
+                  <h4>Teacher Panel</h4>
+                  <div class="nav flex-column nav-pills">
+                     <a href="#logOut" class="nav-link" (click)="goHome()" data-bs-toggle="tab"><i class="fa-solid fa-house"></i> Home</a>
+                     <a href="#users" class="nav-link active" data-bs-toggle="tab"><i class="fas fa-book"></i> Đăng khóa học </a>
+                     <a href="#courses" class="nav-link" data-bs-toggle="tab"><i class="fas fa-book"></i> Đăng bài học</a>
+                     <a href="#courses-uploaded" class="nav-link" data-bs-toggle="tab"><i class="fas fa-book"></i> Khóa học đã upload</a>
+                     <a href="#logOut" class="nav-link" (click)="logout()" data-bs-toggle="tab"><i class="fas fa-sign-out-alt"></i> LogOut</a>
+                  </div>
+               </nav>
+               <!-- Main Content -->
+               <div class="content">
+                  <div class="tab-content">
+
+
+                     <!-- User Table -->
+                     <div id="users" class="tab-pane fade show active ">
+                        <div class="table-container">
+                           <div class="container">
+                              <!-- Phần upload khóa học và bài học -->
+                              <div class="upload-section">
+                                 <h2>Upload Khóa Học</h2>
+                                 <form [formGroup]="courseForm" (ngSubmit)="uploadCourse()" id="course-form">
+                                 <!-- Trường file upload -->
+                                 <div class="form-group">
+                                    <label for="file">File:</label>
+                                    <input
+                                       type="file"
+                                       id="file"
+                                       class="form-control rounded-3"
+                                       (change)="onFileChangeCourse($event)"
+                                       required
+                                       />
+                                 </div>
+                                 <!-- Trường courseName -->
+                                 <div class="form-group">
+                                    <label for="courseName">Tên khóa học:</label>
+                                    <input
+                                       type="text"
+                                       id="courseName"
+                                       class="form-control rounded-3"
+                                       formControlName="courseName"
+                                       placeholder="Tên khóa học"
+                                       required
+                                       />
+                                 </div>
+                                 <!-- Trường title -->
+                                 <div class="form-group">
+                                    <label for="title">Tiêu đề:</label>
+                                    <input
+                                       type="text"
+                                       id="title"
+                                       class="form-control rounded-3"
+                                       formControlName="title"
+                                       placeholder="Tiêu đề"
+                                       required
+                                       />
+                                 </div>
+                                 <!-- Trường description -->
+                                 <div class="form-group">
+                                    <label for="description">Mô tả:</label>
+                                    <textarea
+                                       id="description"
+                                       class="form-control rounded-3"
+                                       formControlName="description"
+                                       placeholder="Mô tả"
+                                       required
+                                       ></textarea>
+                                 </div>
+                                 <!-- Trường avatarCourseUrl -->
+                                 <div class="form-group">
+                                    <label for="avatarCourseUrl">URL avatar khóa học:</label>
+                                    <input
+                                       type="text"
+                                       id="avatarCourseUrl"
+                                       class="form-control rounded-3"
+                                       formControlName="avatarCourseUrl"
+                                       placeholder="URL avatar khóa học"
+                                       required
+                                       />
+                                 </div>
+                                 <!-- Trường price -->
+                                 <div class="form-group">
+                                    <label for="price">Giá:</label>
+                                    <input
+                                       type="text"
+                                       id="price"
+                                       class="form-control rounded-3"
+                                       formControlName="price"
+                                       placeholder="Giá"
+                                       required
+                                       />
+                                    <small class="form-text text-muted">Ví dụ: 19.99</small>
+                                 </div>
+                                 <!-- Trường content -->
+                                 <div class="form-group">
+                                    <label for="content">Nội dung:</label>
+                                    <textarea
+                                       id="content"
+                                       class="form-control rounded-3"
+                                       formControlName="content"
+                                       placeholder="Nội dung"
+                                       required
+                                       ></textarea>
+                                 </div>
+
+                                  <!-- Thời lượng khóa học -->
+  <div class="form-group">
+    <label for="timeCourse">Thời lượng khóa học (giờ):</label>
+    <input
+      type="text"
+      id="timeCourse"
+      class="form-control rounded-3"
+      formControlName="timeCourse"
+      placeholder="Thời lượng khóa học"
+      required
+    />
+  </div>
+
+  <!-- Số lượng bài giảng -->
+  <div class="form-group">
+    <label for="lectures">Số bài giảng:</label>
+    <input
+      type="number"
+      id="lectures"
+      class="form-control rounded-3"
+      formControlName="lectures"
+      placeholder="Nhập số bài giảng"
+      required
+    />
+  </div>
+                                 <!-- Ngôn ngữ khóa học -->
+<div class="form-group">
+  <label for="language">Ngôn ngữ:</label>
+  <select
+    id="language"
+    class="form-control rounded-3"
+    formControlName="language"
+    required
+  >
+    <option value="">-- Chọn ngôn ngữ --</option>
+    <option value="Vietnamese">Tiếng Việt</option>
+    <option value="English">Tiếng Anh</option>
+    <option value="Chinese">Tiếng Trung</option>
+  </select>
+</div>
+ <!-- Có chứng chỉ hay không -->
+ <div class="form-group">
+  <label for="certificate">Chứng chỉ:</label>
+  <select
+    id="certificate"
+    class="form-control rounded-3"
+    formControlName="certificate"
+    required
+  >
+    <option value="">-- Chọn --</option>
+    <option value="true">Có</option>
+    <option value="false">Không</option>
+  </select>
+</div>
+
+                                 <!-- Nút submit -->
+                                 <button type="submit" class="btn btn-primary mt-3"  [disabled]="isLoading">
+                                 Submit<!-- Hiển thị vòng quay khi isLoading = true -->
+                                 </button>
+                                
+                                 </form>
+                                 <!-- Modal -->
+                                <div *ngIf="isLoading" class="modal-overlay">
+                                  <div class="modal-content">
+                                    <h2>Đang upload...</h2>
+                                    <div class="spinner"></div>
+                                  </div>
+                                </div>
+                                
+                                 <!-- Hiển thị danh sách bài học đã upload -->
+                                 <h3>Danh sách bài học đã upload:</h3>
+                                 <ul>
+                                    <!-- <li *ngFor="let lesson of course.lessons">
+                                       <strong>{{ lesson.name }}</strong> - {{ lesson.description }} ({{ lesson.duration }})
+                                       </li> -->
+                                 </ul>
+                              </div>
+                              <!-- Navbar bên phải để xem các khóa học đã upload -->
+                              <div class="navbar">
+                                 <h2>Danh sách khóa học</h2>
+                                 <ul>
+                                    <!-- <li *ngFor="let course of courses">
+                                       {{ course.name }}
+                                       </li> -->
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+
+
+                     <!-- Course Table -->
+                     <div id="courses" class="tab-pane ">
+                        <div class="table-container">
+                           <h2>Upload Bài Học</h2>
+                           <div style="display: flex;justify-content: space-between;">
+                            <form [formGroup]="uploadFormLesson"  id="lesson-form">
+                              <!-- Trường byCourse -->
+                                <div class="form-group">
+                                  <label for="byCourse">Thuộc khóa học:</label>
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      id="byCourse"
+                                      class="form-control rounded-3"
+                                      formControlName="byCourse"
+                                      placeholder="Tên khóa học"
+                                      required
+                                      #nameCourse
+                                    />
+                                    <button style="border-radius: 5px; margin-left: 10px;"
+                                      type="button"
+                                      class="btn btn-green"
+                                      (click)="onSearchCourse()"
+                                      [disabled]="!uploadFormLesson.get('byCourse')?.valid"
+                                    >
+                                      Tìm kiếm
+                                    </button>
+                                  </div>
+                                  <small class="form-text text-muted">Ví dụ: Khóa học Angular</small>
+                                </div>
+                              <!-- Trường file upload -->
+                              <div class="form-group">
+                                <label for="file">File:</label>
+                                <input
+                                  type="file"
+                                  id="file"
+                                  class="form-control rounded-3"
+                                  (change)="onFileChange($event)"
+                                  required
+                                />
+                                
+                              </div>
+
+                              <!-- Trường title -->
+                              <div class="form-group">
+                                <label for="title">Tiêu đề:</label>
+                                <input
+                                  type="text"
+                                  id="title"
+                                  class="form-control rounded-3"
+                                  formControlName="title"
+                                  placeholder="Tiêu đề"
+                                  required
+                                />
+                              </div>
+
+                              <!-- Trường description -->
+                              <div class="form-group">
+                                <label for="description">Mô tả:</label>
+                                <textarea
+                                  id="description"
+                                  class="form-control rounded-3"
+                                  formControlName="description"
+                                  placeholder="Mô tả"
+                                  required
+                                ></textarea>
+                              </div>
+
+                              <!-- Trường avatarLesson -->
+                              <div class="form-group">
+                                <label for="avatarLesson">URL avatar bài học:</label>
+                                <input
+                                  type="text"
+                                  id="avatarLesson"
+                                  class="form-control rounded-3"
+                                  formControlName="avatarLesson"
+                                  placeholder="URL avatar bài học"
+                                  required
+                                />
+                              </div>
+                              <!-- Nút submit -->
+                              <button (click)="uploadLesson()" class="btn btn-primary mt-3" >
+                                Submit
+                              </button>
+                              
+                            </form>
+ <!-- Modal -->
+ <div *ngIf="isLoading" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Đang upload...</h2>
+    <div class="spinner"></div>
+  </div>
+</div>
+                            
+                            <div>
+                             
+                               <!-- Phần hiển thị danh sách bài học -->
+                              <div class="right-panel">
+                                
+                                <div class="lesson-list">
+                                  <div *ngFor="let lesson of lessons" class="lesson-card">
+                                    <div class="lesson-thumbnail">
+                                      <!-- <img [src]="lesson.avatarLesson" alt="Thumbnail" /> -->
+                                      <img 
+                                          [src]="lesson.avatarLesson || 'https://nehalist.io/content/images/2017/09/angular-logo.png'" 
+                                          alt="Thumbnail" 
+                                          (error)="onImageError($event)"
+                                        />
+
+                                    </div>
+                                    <div class="lesson-details">
+                                      <h3>{{ lesson.title }}</h3>
+                                      <p>{{ lesson.description }}</p>
+                                      <small>Thứ tự: {{ lesson.orderIndex }}</small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     <!--  danh sách các khóa học đã upload  -->
+<br>
+                     <div id="courses-uploaded" class="tab-pane ">
+                      <h1 class="course-management-title">Danh sách khóa học đã upload</h1>
+    <table class="course-management-table">
+        <thead>
+            <tr>
+                <th class="course-id">ID</th>
+                <th class="course-name">Tên khóa học</th>
+                <th class="course-title">Tiêu đề</th>
+                <th class="course-description">Mô tả</th>
+                <th class="course-price">Giá</th>
+                <th class="course-content">Nội dung</th>
+                <th class="course-status">Trạng thái</th>
+                <!-- <th class="course-action">Hành động</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of listCourseUploadByTeacher | paginate: { id: 'courses',itemsPerPage: 10, currentPage: currentPageCourses }; let i = index" class="course-row" data-id="4">
+                <td class="course-id">{{ (currentPageCourses - 1) * 10 + i + 1 }}</td>
+                <td class="course-name">{{course.course_name}}</td>
+                <td class="course-title">{{course.title}}</td>
+                <td class="course-description">{{course.description}}</td>
+                <td class="course-price">{{course.price}}</td>
+                <td class="course-content">{{course.content}}</td>
+                <!-- <td class="course-status">
+                    <span class="status approve">APPROVE</span>
+                </td> -->
+                <td class="course-status">
+                  <span [ngClass]="{
+                      'status': true,
+                      'approve': course.status === 'APPROVE',
+                      'pending': course.status === 'PENDING',
+                      'reject': course.status === 'REJECT'
+                    }">
+                    {{ course.status }}
+                  </span>
+                </td>
+                
+                <!-- <td class="course-action">
+                    <select class="status-select" onchange="changeStatus(this)">
+                        <option value="APPROVE">APPROVE</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="REJECT">REJECT</option>
+                    </select>
+                </td> -->
+            </tr>
+            <!-- Thêm các hàng khác tại đây -->
+        </tbody>
+    </table>
+    <br>
+     <!-- Phân trang -->
+     <pagination-controls id="courses" (pageChange)="onPageChangeCourse($event)"></pagination-controls>
+
+    <script>
+        function changeStatus(selectElement) {
+            const row = selectElement.closest('.course-row');
+            const courseId = row.getAttribute('data-id');
+            const newStatus = selectElement.value;
+
+            // Cập nhật giao diện
+            const statusSpan = row.querySelector('.status');
+            statusSpan.className = 'status ' + newStatus.toLowerCase();
+            statusSpan.textContent = newStatus;
+
+            // Gửi yêu cầu cập nhật trạng thái lên server
+            updateCourseStatus(courseId, newStatus);
+        }
+
+        function updateCourseStatus(courseId, newStatus) {
+            // Gửi yêu cầu API để cập nhật trạng thái
+            fetch(`/api/courses/${courseId}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: newStatus }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Cập nhật trạng thái thành công:', data);
+            })
+            .catch(error => {
+                console.error('Lỗi khi cập nhật trạng thái:', error);
+            });
+        }
+    </script>
+                   </div>
+
+
+
+
+
+
+
+
+                   
+                  </div>
+               </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+         </body>
+      </html>

@@ -198,7 +198,8 @@ body.modal-open {
                 <span>Xin chào, {{ userName }}</span>
               </a>
           <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
-            <li *ngIf="hasRole('ADMIN')" ><a class="dropdown-item" (click)="openAdmin()">🖥  Trang quản trị</a></li>
+            <li *ngIf="hasRole('Admin')" ><a class="dropdown-item" (click)="openAdmin()">🖥  Trang quản trị</a></li>
+            <li *ngIf="hasRole('Teacher')" ><a class="dropdown-item" (click)="openTeacherPage()"> 👨‍🏫  Trang cho giáo viên</a></li>
             <li ><a class="dropdown-item" (click)="myCourse()">🎓  Khóa học của tôi</a></li>
             <li ><a class="dropdown-item" (click)="viewProfile()">👤 Thông tin cá nhân</a></li>
               <li><a class="dropdown-item" (click)="editProfile()">⚙️ Chỉnh sửa thông tin</a></li>

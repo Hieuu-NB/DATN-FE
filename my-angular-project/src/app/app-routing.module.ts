@@ -9,10 +9,12 @@ import { CourseDetailComponent } from './app-e-learning/pages/course-detail/cour
 import { MyCourseComponent } from './app-e-learning/pages/my-course/my-course.component';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { AdminComponent } from './app-e-learning/pages/admin/admin.component';
+import { LeadingComment } from '@angular/compiler';
+import { LearningComponent } from './app-e-learning/pages/learning/learning.component';
+import { TeacherPageComponent } from './app-e-learning/pages/teacher-page/teacher-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  // { path: 'trang-chu', component: TrangChuComponent ,canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'sign-in', component: LoginComponent},
   { path: 'home', component: HomeComponent }, 
   { path: 'unauthorized', component: UnauthorizedComponent },
@@ -20,8 +22,10 @@ const routes: Routes = [
   { path: 'course-detail', component: CourseDetailComponent },
   { path: 'my-course', component: MyCourseComponent },
   { path: 'qr-code', component: QRCodeComponent },
-  { path: 'admin',component: AdminComponent,canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
-  { path: 'unauthorized',component: UnauthorizedComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
+  { path: 'admin',component: AdminComponent,canActivate: [AuthGuard], data: { roles: ['Admin'] } },
+  { path: 'learning-page',component: LearningComponent },
+  { path: 'teacher-page',component: TeacherPageComponent },
+  { path: 'unauthorized',component: UnauthorizedComponent },
 
 ];
 

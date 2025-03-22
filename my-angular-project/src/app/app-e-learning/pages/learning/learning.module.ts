@@ -2,21 +2,18 @@ import { Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { AdminComponent } from "./admin.component";
 import { NgxPaginationModule } from "ngx-pagination";
-import { TruncatePipe } from "src/app/truncate.pipe";
+import { LearningComponent } from "./learning.component";
 
 const routes: Routes = [
     {
-      path: '', component: AdminComponent,
+      path: '', component: LearningComponent,
     }
   ];
   
   @NgModule({
     declarations: [
-        AdminComponent,
-        TruncatePipe,
-
+        LearningComponent,
     ],
     imports: [
       FormsModule,
@@ -26,5 +23,5 @@ const routes: Routes = [
     ],
     //providers: [OverlayService]
   })
-  export class AdminModule { }
+  export class LearningModule { }
   
