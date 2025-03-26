@@ -77,33 +77,6 @@ activeTab: string = 'content'; // Tab mặc định là 'content'
     this.activeTab = tab;
   }
 
-  // Fake data
- // lectures: Lecture[] = []; // Danh sách bài giảng
-  //   {
-  //     id: 1,
-  //     title: 'Bài giảng 1: Giới thiệu Angular',
-  //     description: 'Tìm hiểu về Angular và cách xây dựng ứng dụng web hiện đại.',
-  //     videoUrl: 'https://s3-bucket-by-hieu.s3.ap-southeast-2.amazonaws.com/Angular/lesson/20250321_1459566274960786770.mp4',
-  //     duration: '10:00'
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Bài giảng 2: Components trong Angular',
-  //     description: 'Học cách tạo và sử dụng components trong Angular.',
-  //     videoUrl: 'https://s3-bucket-by-hieu.s3.ap-southeast-2.amazonaws.com/MSA/lesson/20250321_1413116274960777280.mp4',
-  //     duration: '15:00'
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Bài giảng 3: Data Binding',
-  //     description: 'Khám phá cách binding dữ liệu trong Angular.',
-  //     videoUrl: 'https://s3-bucket-by-hieu.s3.ap-southeast-2.amazonaws.com/V%C4%83n%20h%E1%BB%8Dc/lesson/20250322_0003116274960786770.mp4',
-  //     duration: '12:00'
-  //   }
-  // ];
-
-
-  // Hàm chọn bài giảng
 
   // Hàm chọn bài giảng
   selectLecture(lecture: Lecture, event: Event): void {

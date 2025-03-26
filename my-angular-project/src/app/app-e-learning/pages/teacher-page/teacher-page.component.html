@@ -639,6 +639,7 @@ input[type="file"].form-control {
                      <a href="#users" class="nav-link active" data-bs-toggle="tab"><i class="fas fa-book"></i> Đăng khóa học </a>
                      <a href="#courses" class="nav-link" data-bs-toggle="tab"><i class="fas fa-book"></i> Đăng bài học</a>
                      <a href="#courses-uploaded" class="nav-link" data-bs-toggle="tab"><i class="fas fa-book"></i> Khóa học đã upload</a>
+                     <a href="#performance" class="nav-link" data-bs-toggle="tab"><i class="fas fa-book"></i> Tổng quan</a>
                      <a href="#logOut" class="nav-link" (click)="logout()" data-bs-toggle="tab"><i class="fas fa-sign-out-alt"></i> LogOut</a>
                   </div>
                </nav>
@@ -929,10 +930,9 @@ input[type="file"].form-control {
                                <!-- Phần hiển thị danh sách bài học -->
                               <div class="right-panel">
                                 
-                                <div class="lesson-list">
+                                <!-- <div class="lesson-list">
                                   <div *ngFor="let lesson of lessons" class="lesson-card">
                                     <div class="lesson-thumbnail">
-                                      <!-- <img [src]="lesson.avatarLesson" alt="Thumbnail" /> -->
                                       <img 
                                           [src]="lesson.avatarLesson || 'https://nehalist.io/content/images/2017/09/angular-logo.png'" 
                                           alt="Thumbnail" 
@@ -946,7 +946,46 @@ input[type="file"].form-control {
                                       <small>Thứ tự: {{ lesson.orderIndex }}</small>
                                     </div>
                                   </div>
-                                </div>
+                                </div> -->
+<!-- Nếu lessons rỗng hoặc không tồn tại -->
+<ng-container *ngIf="!lessons || lessons.length === 0; else hasLessons">
+  <div class="empty-message">
+    <p>Bạn chưa upload bài học nào cho khóa học này</p>
+  </div>
+</ng-container>
+
+<!-- Nếu có lessons, hiển thị danh sách -->
+<ng-template #hasLessons>
+  <div *ngFor="let lesson of lessons" class="lesson-card">
+    <div class="lesson-thumbnail">
+      <img 
+        [src]="lesson.avatarLesson || 'https://nehalist.io/content/images/2017/09/angular-logo.png'" 
+        alt="Thumbnail" 
+        (error)="onImageError($event)"
+      />
+    </div>
+    <div class="lesson-details">
+      <h3>{{ lesson.title }}</h3>
+      <p>{{ lesson.description }}</p>
+      <small>Thứ tự: {{ lesson.orderIndex }}</small>
+    </div>
+  </div>
+</ng-template>
+
+<!-- CSS cho thông báo trống -->
+<style>
+.empty-message {
+  margin-left: 20px;
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+</style>
+
+
                               </div>
                             </div>
                           </div>
@@ -973,7 +1012,11 @@ input[type="file"].form-control {
 
 
 
-
+                     <div id="performance" class="tab-pane ">
+                      <h1>Doanh thu</h1>
+                     </div>
+  
+  
 
                      <!--  danh sách các khóa học đã upload  -->
 <br>
@@ -1067,6 +1110,13 @@ input[type="file"].form-control {
 
 
 
+                 
+
+
+
+
+
+
 
 
 
@@ -1074,6 +1124,7 @@ input[type="file"].form-control {
                    
                   </div>
                </div>
+               
             </div>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
          </body>

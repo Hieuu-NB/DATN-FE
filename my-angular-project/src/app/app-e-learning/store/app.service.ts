@@ -183,4 +183,10 @@ export class AppService {
         `http://localhost:9002/course-service/course/add-course-detail`,lesson
       );
     }
+
+    loadCourseByCourseName(courseName: any){
+      return this.http.post<any>(
+        `http://localhost:9002/course-service/course/findCourseByCourseName`,courseName
+      );
+    }
 }

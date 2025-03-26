@@ -3,21 +3,18 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { NgxPaginationModule } from "ngx-pagination";
-import { TruncatePipe } from "src/app/truncate.pipe";
 import { CourseDetailPopupModule } from "../popup/course-detail-popup/course-detail-popup.module";
-import { AdminComponent } from "./admin.component";
+import { AboutUsComponent } from "./about-us.component";
 
 const routes: Routes = [
     {
-      path: '', component: AdminComponent,
+      path: '', component: AboutUsComponent,
     }
   ];
   
   @NgModule({
     declarations: [
-        AdminComponent,
-        // CourseDetailPopupComponent,
-        TruncatePipe,
+        AboutUsComponent,
 
     ],
     imports: [
@@ -29,5 +26,5 @@ const routes: Routes = [
     ],
     //providers: [OverlayService]
   })
-  export class AdminModule { }
+  export class AboutUsModule { }
   

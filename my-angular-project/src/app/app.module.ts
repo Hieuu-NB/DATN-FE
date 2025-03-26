@@ -17,8 +17,12 @@ import { MyCourseModule } from './app-e-learning/pages/my-course/my-course.modul
 import { AdminModule } from './app-e-learning/pages/admin/admin.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LearningModule } from './app-e-learning/pages/learning/learning.module';
-import { TeacherPageComponent } from './app-e-learning/pages/teacher-page/teacher-page.component';
 import { TeacherPageModule } from './app-e-learning/pages/teacher-page/teacher-page.module';
+import { CourseDetailPopupModule } from './app-e-learning/pages/popup/course-detail-popup/course-detail-popup.module';
+import { AboutUsModule } from './app-e-learning/pages/about-us/about-us.modue';
+import { ListAuthorComponentModule } from './app-e-learning/pages/list-author/list-author.module';
+import { AuthorDetailComponent } from './app-e-learning/pages/author-detail/author-detail.component';
+import { AuthorDetailModule } from './app-e-learning/pages/author-detail/author-detail.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,12 @@ import { TeacherPageModule } from './app-e-learning/pages/teacher-page/teacher-p
     AdminModule,
     NgxPaginationModule,
     LearningModule,
-    TeacherPageModule
+    TeacherPageModule,
+    CourseDetailPopupModule,
+    AboutUsModule,
+    ListAuthorComponentModule,
+    AuthorDetailModule
+
   ],
   providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true }],
   bootstrap: [AppComponent]

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   courseMarketing: any[] = [];
   courseDevelopment: any[] = []; 
   courseBusiness: any[] = [];
-
+  info = 'info@gmail.com';
 
   userRoles: string[] = []; // Mảng chứa các role của user
   userName: string = ''; // Tên của user
@@ -85,6 +85,14 @@ export class HomeComponent implements OnInit {
         }
       });
     });
+  }
+
+  openAboutUs() { // Mở modal about us
+    this.router.navigate(['about-us']);
+   }
+
+  openListAuthor() { // Mở modal about us
+  this.router.navigate(['list-author']);
   }
 
 

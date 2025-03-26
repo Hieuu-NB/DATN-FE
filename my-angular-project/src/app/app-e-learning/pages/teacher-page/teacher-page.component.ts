@@ -75,31 +75,6 @@ export class TeacherPageComponent {
     language: new FormControl(''), // Ngôn ngữ
     certificate: new FormControl(''), // Chứng chỉ
 
-
-    //  "course_name":"MVC-1", // thay ten khóa học để thêm chi tiết      1
-//     "instructor": "Nguyễn Văn A",                                      2  
-//     "timeCourse": "40 giờ",
-//     "lectures": "20 bài giảng",
-//     "language": "Tiếng Việt",
-//     "certificate": "Có chứng chỉ",
-//     "description": "Khóa học về Java Spring Boot chi tiết",
-//     "curriculum": "Nội dung chương trình giảng dạy",
-//     "price":0,
-//     "reviews": [
-//         {
-//             "rating": 5,
-//             "comment": "Bài giảng rất chi tiết!"
-//         },
-//         {
-//             "rating": 4,
-//             "comment": "Khóa học hữu ích, nhưng cần thêm bài tập thực hành."
-//         },
-//         {
-//             "rating": 3,
-//             "comment": "Chất lượng video nên cải thiện hơn."
-//         }
-//     ]
-// }
   });
 
   uploadFormLesson = new FormGroup({ // Khởi tạo form upload lesson
@@ -143,6 +118,8 @@ export class TeacherPageComponent {
     );
 
     const username = this.authService.getUserName();
+    console.log("username :" +username);
+    
     this.appservice.listCourseUploadByTeacher(username).subscribe(
       (data) => { 
         this.listCourseUploadByTeacher = data.data;
@@ -429,7 +406,7 @@ uploadCourse() {
   const avatarCourseUrl = this.courseForm.get('avatarCourseUrl')?.value;
   const price = this.courseForm.get('price')?.value;
   const content = this.courseForm.get('content')?.value;
-  const username = this.authService.getUserName();
+  const author = this.authService.getUserName();
 
   const courseData = {
     course_name: courseName,
@@ -438,7 +415,7 @@ uploadCourse() {
     avatarCourseUrl,
     price,
     content,
-    username
+    author
   };
 
   const formData = new FormData();
@@ -458,7 +435,7 @@ uploadCourse() {
 
         // Tiếp tục chuẩn bị dữ liệu cho API 2
         this.courseDetail.course_name = courseName;
-        this.courseDetail.instructor = username;
+        this.courseDetail.instructor = author;
         this.courseDetail.curriculum = title;
         this.courseDetail.description = description;
         this.courseDetail.price = price;
@@ -495,6 +472,7 @@ uploadCourse() {
         
         // Gọi API 2 sau khi API 1 thành công
         this.appservice.addDetailLessonApi(this.courseDetail).subscribe({
+          
           next: (response2) => {
             if (response2.status === 200) {
               Swal.fire({

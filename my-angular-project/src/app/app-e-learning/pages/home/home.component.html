@@ -106,7 +106,7 @@ body.modal-open {
     <div class="top_1m text-center pt-2">
 	   <ul class="mb-0 font_14">
 	    <li class="d-inline-block"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">+(000) 345 67 89</a></li>
-		<li class="d-inline-block ms-4"><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">infogmail.com</a></li>
+		<li class="d-inline-block ms-4"><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a class="text-light" href="#">{{info}}</a></li>
 	   </ul>
 	</div>
    </div>
@@ -141,7 +141,7 @@ body.modal-open {
         </li>
 		 
 		<li class="nav-item">
-          <a class="nav-link" href="about.html">About </a>
+          <a class="nav-link" style="cursor: pointer;"  (click)="openAboutUs()" >About </a>
         </li>
 		
 		<li class="nav-item dropdown">
@@ -164,18 +164,9 @@ body.modal-open {
           </ul>
         </li>
 		
-		<li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Pages
-          </a>
-          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-		   <li><a class="dropdown-item" href="team.html"> Team</a></li>
-		   <li><a class="dropdown-item" href="contact.html"> Contact</a></li>
-		   <li><a class="dropdown-item" href="faq.html"> Faq</a></li>
-            <li><a class="dropdown-item" href="register.html"> Register</a></li>
-            <li><a class="dropdown-item border-0" href="login.html"> Login</a></li>
-          </ul>
-        </li>
+		<li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="openListAuthor()" >Authors </a>
+          </li>
 
 				
       </ul>
@@ -195,7 +186,7 @@ body.modal-open {
 		<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrY7dJj0QnImGcypj9oBdr9u9joHrxgaKY_g&s" class="rounded-circle me-2" width="32" height="25" alt="User Avatar">
-                <span>Xin chào, {{ userName }}</span>
+                <span>Hello, {{ userName }}</span>
               </a>
           <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
             <li *ngIf="hasRole('Admin')" ><a class="dropdown-item" (click)="openAdmin()">🖥  Trang quản trị</a></li>
@@ -225,7 +216,7 @@ body.modal-open {
 	  <h6 class="col_green">Start your favourite course</h6>
 	  <h1 class="mt-4">Now learning from anywhere, and build your <span class="col_green">bright career.</span></h1>
 	  <p class="mt-4">It has survived not only five centuries but also the leap into electronic typesetting.</p>
-	  <h6 class="mb-0 mt-4"><a class="button_1" href="#">Start A Course</a></h6>
+	  <h6 class="mb-0 mt-4"><a class="button_1" href="#course_h">Start A Course</a></h6>
 	 </div>
 	</div>
 	<div class="col-md-8">
@@ -233,7 +224,8 @@ body.modal-open {
 	   <div class="center_h1r1">
 	     <div class="grid clearfix">
 				  <figure class="effect-jazz mb-0">
-					<a href="#"><img src="../../../../assets/img/1.jpg" class="w-100" alt="abc"></a>
+					<!-- <a href="#"><img src="../../../../assets/img/1.jpg" class="w-100" alt="abc"></a> -->
+					<a href="#"><img src="../../../../assets/img/pexels-pixabay-159866.jpg" class="w-100 h-80" alt="abc"></a>
 				  </figure>
 			  </div>
 	   </div>
@@ -267,7 +259,7 @@ body.modal-open {
 	 </div>
 	</div>
   </div>
-  <div class="row course_h2 mt-4">
+  <div  class="row course_h2 mt-4">
    <div class="col-md-12">
     <div class="course_h2m p-4 bg_light rounded_10">
 	  <ul class="nav nav-tabs mb-0 justify-content-center border-0">
@@ -315,7 +307,8 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <!-- <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail"> -->
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_dev_' + i">
                                         ▶
                                     </button>
@@ -350,11 +343,11 @@ body.modal-open {
                             </div>
                         </div>
             
-                        <div class="course_h3i1i row mt-3">
+                        <div (click)="openCourseDetail(course.course_name)" class="course_h3i1i row mt-3">
                             <div class="col-md-8 col-8">
                                 <div class="course_h3i1il">
                                     <h6 class="font_14">
-                                        <a href="#">
+                                        <a  href="#">
                                             <img src="../../../../assets/img/9.jpg" class="rounded-circle me-2" alt="abc">
                                             {{course.course_name}}
                                         </a>
@@ -1519,7 +1512,7 @@ body.modal-open {
 	  <h4 class="mb-3"><a href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a></h4>
 	  <h5>Semper Dt</h5>
 	  <h6 class="col_green mt-3 mb-3">Lorem, Augue (UB).</h6>
-	  <h6><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a href="#">infogmail.com</a></h6>
+	  <h6><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a href="#">{{info}}</a></h6>
 	  <h6 class="mt-3"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a href="#">+(000) 345 67 89 </a></h6>
 	  <ul class="mb-0 mt-3">
 	    <li class="d-inline-block fs-4 me-2"> <a href="#"><i class="fa fa-facebook"></i></a></li>

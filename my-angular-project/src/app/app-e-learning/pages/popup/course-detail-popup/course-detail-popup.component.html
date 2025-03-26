@@ -1,0 +1,75 @@
+<div class="popup-overlay" (click)="close()">
+    <div class="popup-container" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <h2 class="popup-title">{{course.course_name}}</h2>
+        <button class="close-btn" (click)="close()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+  
+      <div class="popup-content">
+        <!-- Video chính bên trái -->
+        <div class="main-video">
+          <video #videoPlayer controls>
+            <source [src]="currentVideo" type="video/mp4">
+            Trình duyệt không hỗ trợ video
+          </video>
+
+         
+          <div class="video-info">
+            <h3>{{course.title }}</h3>
+            <p>{{selectedLecture?.description }}</p>
+          </div>
+        </div>
+  
+        <!-- Danh sách video nhỏ bên phải -->
+        <div class="video-list">
+          <div class="list-header">
+            <h3>Danh sách bài giảng</h3>
+            <span>{{listLesson.length}} videos</span>
+          </div>
+          <div class="scroll-container">
+            <div class="video-item" 
+                 *ngFor="let video of listLesson" 
+
+                 (click)="changeVideo(video, videoPlayer)"
+
+                 [class.active]="currentVideo?.id === video.id">
+
+              <div class="thumbnail">
+
+                <video [src]="video.videoUrl"></video>
+
+                <div class="duration">{{video.duration || '00:00'}}</div>
+
+              </div>
+
+              <div class="item-info">
+                <h4>{{video.title}}</h4>
+                <p>{{video.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="popup-footer">
+        <button class="btn reject-btn" (click)="onReject()">
+          <i class="icon-close"></i> Từ chối
+        </button>
+        <button class="btn approve-btn" (click)="onApprove()">
+          <i class="icon-check"></i> Duyệt
+        </button>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+ <div *ngIf="isLoading" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Đang upload...</h2>
+    <div class="spinner"></div>
+  </div>
+</div>

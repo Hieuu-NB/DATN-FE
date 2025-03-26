@@ -366,8 +366,8 @@ background: rgba(255, 255, 255, 0.1);
                             
                             <select class="form-control rounded-3 mt-3" formControlName="role">
                                 <option value="" disabled selected>Role</option>
-                                <option value="TEACHER">Teacher</option>
-                                <option value="STUDENT">Student</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Student">Student</option>
                                 <option value="Admin">Admin</option>
                               </select>
                               
@@ -477,7 +477,7 @@ background: rgba(255, 255, 255, 0.1);
                   <!-- Modal hiển thị khóa học -->
                   <ng-template #coursesModal let-modal>
                     <div class="modal-header">
-                        <h4 class="modal-title">User's Courses</h4>
+                        <h4 class="modal-title">Khóa học đã mua</h4>
                         <button type="button" class="close btn-close-lg" (click)="modal.dismiss()">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -595,7 +595,9 @@ background: rgba(255, 255, 255, 0.1);
                     <thead class="thead-dark">
                       <tr>
                         <th class="course-id">#</th>
+                        <th>Logo</th>
                         <th class="course-name">Tên khóa học</th>
+                        <th class="course-name">Tác giả</th>
                         <th class="course-title">Tiêu đề</th>
                         <th class="course-description">Mô tả</th>
                         <th class="course-price">Giá</th>
@@ -608,21 +610,26 @@ background: rgba(255, 255, 255, 0.1);
                     <tbody>
                       <tr *ngFor="let course of listCourseFromDB | paginate: { id: 'coursesUploaded',itemsPerPage: 5, currentPage: currentPageCoursesUploaded }; let i = index">
                         <td class="course-id">{{ (currentPageCoursesUploaded - 1) * 5 + i + 1 }}</td>
+                            <td><img [src]="course.avatarCourseUrl" class="avatar"></td>
                             <td class="course-name">{{course.course_name}}</td>
+                            <td class="course-name">{{course.author}}</td>
                             <td class="course-title">{{course.title}}</td>
                             <td class="course-description">{{course.description}}</td>
                             <td class="course-price">{{course.price}}</td>
                             <td class="course-content">{{course.content}}</td>
-                            <td class="course-content"><button type="button" (click)="openCourseDetailForApprove()" class="btn btn-primary">View</button></td>
+                            <!-- <td class="course-content"><button type="button" (click)="openCourseDetailForApprove()" class="btn btn-primary">View</button></td> -->
+                            <td class="course-content">
+                              <button type="button" (click)="openCourseDetailForApprove(course)" class="btn btn-primary">View</button>
+                            </td>
                             <td class="course-status">
-                              <span class="status" [ngClass]="getStatusClass(course.status)">
+                              <span style="width: 80px;" class="status" [ngClass]="getStatusClass(course.status)">
                                 {{ course.status }}
                               </span>
                             </td>
                           
                             <!-- Cột select để thay đổi trạng thái -->
-                            <td class="course-action">
-                              <select class="status-select"
+                            <td  class="course-action">
+                              <select  class="status-select"
                                       [(ngModel)]="course.status"
                                       (change)="changeStatus(course)">
                                 <option value="APPROVE">APPROVE</option>
@@ -650,10 +657,15 @@ background: rgba(255, 255, 255, 0.1);
 
 
 
+<!-- Thêm popup vào cuối file -->
 
 
-
-
+<app-course-detail-popup 
+  *ngIf="showPopup" 
+  [course]="selectedCourse1" 
+  [listLesson]="listLesson"
+  (closePopupEvent)="closePopup()"
+></app-course-detail-popup>
 
 
 

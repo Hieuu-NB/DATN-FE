@@ -464,12 +464,29 @@ export class AdminComponent implements OnInit {
       
 
 
-  openCourseDetailForApprove() {
-    console.log('openCourseDetailForApprove');
-    
-    // this.selectedCourse = course;
-    // this.modalService.open(modalRef, { size: 'xxl', centered: true });
-  }
+// Thêm các biến và hàm này
+showPopup: boolean = false;
+selectedCourse1: any;
+listLesson: [] = [];
+openCourseDetailForApprove(course: any) {
+
+
+  this.appservice.loadLessonByCourseNameApi(course.course_name).subscribe((data) => {
+    this.listLesson = data; // Lấy danh sách bài giảng
+    console.log("listLesson:"+this.listLesson);
+    this.selectedCourse1 = course;
+    this.showPopup = true;
+  });
+
+  // this.selectedCourse1 = course;
+  // this.showPopup = true;
+  // console.log(course);
+  
+}
+
+closePopup() {
+  this.showPopup = false;
+}
 
 
 
@@ -487,7 +504,6 @@ export class AdminComponent implements OnInit {
   playVideo(video: any) {
     this.selectedVideo = this.sanitizer.bypassSecurityTrustResourceUrl(video.url);
   }
-
 
 
 

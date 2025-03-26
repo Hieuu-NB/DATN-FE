@@ -1,0 +1,59 @@
+<div class="author-container">
+    <section class="author-profile">
+      <div class="author-info">
+        <h2 class="author-name">{{ author.name }}</h2>
+        <p class="author-bio">{{ author.bio }}</p>
+        
+        <div class="author-stats">
+          <div class="stat-item" *ngFor="let stat of author.stats">
+            <div class="stat-number">{{ stat.value }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <a *ngFor="let link of author.socialLinks" 
+             [href]="link.url" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            <i [class]="link.icon"></i> {{ link.name }}
+          </a>
+        </div>
+      </div>
+      
+      <div class="author-avatar">
+        <img src="../../../../assets/img/avatar4x4.jpg" [alt]="author.name + ' avatar'">
+      </div>
+    </section>
+    
+    <section class="courses-section">
+      <h2>Các khóa học đã đăng</h2>
+      
+      <div *ngIf="isLoading" class="loading">
+        <div class="spinner"></div>
+        <p>Đang tải khóa học...</p>
+      </div>
+      
+      <div *ngIf="!isLoading && courses.length === 0" class="empty-message">
+        <p>Chưa có khóa học nào được đăng tải</p>
+      </div>
+      
+      <div class="courses-grid">
+        <div class="course-card" 
+             *ngFor="let course of courses" 
+             (click)="viewCourseDetail(course.id)">
+          <div class="course-thumbnail">
+            <img [src]="course.thumbnail" [alt]="course.title">
+          </div>
+          <div class="course-details">
+            <h3 class="course-title">{{ course.title }}</h3>
+            <p class="course-description">{{ course.description }}</p>
+            <div class="course-meta">
+              <span class="course-price">{{ course.price | currency:'VND':'symbol':'1.0-0' }}</span>
+              <span class="course-students">{{ course.students | number }} học viên</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
