@@ -47,28 +47,13 @@ export class Reviews {
     comment!: any;
 }
 
-// {
-//     "course_name":"MVC-1", // thay ten khóa học để thêm chi tiết
-//     "instructor": "Nguyễn Văn A",
-//     "timeCourse": "40 giờ",
-//     "lectures": "20 bài giảng",
-//     "language": "Tiếng Việt",
-//     "certificate": "Có chứng chỉ",
-//     "description": "Khóa học về Java Spring Boot chi tiết",
-//     "curriculum": "Nội dung chương trình giảng dạy",  == title
-//     "price":0,
-//     "reviews": [
-//         {
-//             "rating": 5,
-//             "comment": "Bài giảng rất chi tiết!"
-//         },
-//         {
-//             "rating": 4,
-//             "comment": "Khóa học hữu ích, nhưng cần thêm bài tập thực hành."
-//         },
-//         {
-//             "rating": 3,
-//             "comment": "Chất lượng video nên cải thiện hơn."
-//         }
-//     ]
-// }
+
+export class LoadLessonByCourseNameAndUserName {
+    courseName!: any;
+    userName!: any;
+}
+
+export class NotiBuyCourse {
+    courseName!: any;
+    userName!: any;
+}

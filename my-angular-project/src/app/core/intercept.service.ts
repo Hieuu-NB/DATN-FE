@@ -17,7 +17,7 @@ export class InterceptService implements HttpInterceptor {
     // Danh sách các API không cần token (ví dụ: API login)
     const excludedUrls = ['authorization-service/login', 'authorization-service/register',
                           '/course-service/file/createCourse', '/course-service/file/listCourse',
-                          // '/authorization-service/delete-user-by-username'
+                          '/email/send-email-welcome','/course/total-course','course/listCourseApproved'
     ];
 
     // Kiểm tra nếu API thuộc danh sách cần loại bỏ token 

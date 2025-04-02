@@ -35,11 +35,16 @@ export class MyCourseComponent implements OnInit {
 
 
     this.name.username = this.userName;
+    console.log("username :"+this.name.username);
+    
     this.listCourse = this.appservice.loadMyCourseByUserName(this.name).subscribe(
       (data) => {
         this.listCourse = data;
         this.myCourses = this.listCourse.data;
-        // console.log("listCourse :"+this.listCourse[0].content);
+        console.log("listCourse :"+this.listCourse[0].course_name);
+        console.log("listCourse :"+this.listCourse[1].course_name);
+        console.log("listCourse :"+this.listCourse[2].course_name);
+        console.log("listCourse :"+this.listCourse[3].course_name);
        
       }
     );

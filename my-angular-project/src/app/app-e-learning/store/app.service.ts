@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserCourseName, UserEdit, UserName, UserRegister } from "./models/user.model";
+import { LoadLessonByCourseNameAndUserName, NotiBuyCourse, User, UserCourseName, UserEdit, UserName, UserRegister } from "./models/user.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 export class AppService {
     constructor(private http: HttpClient) {}
     private apiUrlCourse = 'http://localhost:9002/course-service';
+    private apiUrlUser = 'http://localhost:1223/authorization-service';
 
     loadAllUsers(){ // load table Users ra 
       return this.http.get<any>(
@@ -176,6 +177,13 @@ export class AppService {
         `http://localhost:9002/course-service/course/list-Lesson-by-name-course`,courseName
       );
     }
+
+    // api check xem khóa học có phải của user đó không
+    loadLessonByCourseNameAndUserNameApi(input: LoadLessonByCourseNameAndUserName){
+      return this.http.post<any>(
+        `http://localhost:9002/course-service/course/list-Lesson-by-name-course-and-user-name`,input
+      );
+    }
     
     // api thêm chi tiết cho bài học
     addDetailLessonApi(lesson: any){
@@ -189,4 +197,30 @@ export class AppService {
         `http://localhost:9002/course-service/course/findCourseByCourseName`,courseName
       );
     }
+
+
+    listTeacher(){
+      return this.http.get<any>(
+        this.apiUrlUser+`/list-teacher`
+      );
+    }
+
+    totalCourse(){
+      return this.http.get<any>(
+        this.apiUrlCourse+`/course/total-course`
+      );
+    }
+
+    sendEmailRegisterSuccess(email: any): Observable<any> {
+      return this.http.post(`http://localhost:9006/email/send-email-welcome/${email}`, null);
+    }
+
+    notiBuyCourse(noti: NotiBuyCourse): Observable<any> {
+      return this.http.post(`http://localhost:9004/notification-service/send-email-noti-buy-course`, noti);
+    }
+
+    payWithVNPay(amount: any, bankCode: any): Observable<any> {
+      return this.http.get(`http://localhost:8080/api/v1/payment/vn-pay?amount=${amount}&bankCode=${bankCode}`);
+    }
+    
 }

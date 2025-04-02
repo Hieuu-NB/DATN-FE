@@ -230,7 +230,7 @@ body.modal-open {
 			  </div>
 	   </div>
 	   <div class="center_h1r2 position-absolute w-100 top-0 p-3">
-	     <h3 class="mb-0 d-inline-block text-white text-center bg_green rounded-circle"><i class="fa fa-book mb-3"></i> <br> 1,245<br> <span class="fs-6 fw-normal  d-inline-block">Courses</span></h3>
+	     <h3 class="mb-0 d-inline-block text-white text-center bg_green rounded-circle"><i class="fa fa-book mb-3"></i> <br>{{totalCourse}}<br> <span class="fs-6 fw-normal  d-inline-block">Courses</span></h3>
 	   </div>
 	 </div>
 	</div>
@@ -486,7 +486,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
                                         ▶
                                     </button>
@@ -575,7 +575,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_mark_' + i">
                                         ▶
                                     </button>
@@ -664,7 +664,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
                                         ▶
                                     </button>
@@ -753,7 +753,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_data_' + i">
                                         ▶
                                     </button>
@@ -841,7 +841,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
                                         ▶
                                     </button>
@@ -930,7 +930,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_bus_' + i">
                                         ▶
                                     </button>
@@ -1018,7 +1018,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
                                         ▶
                                     </button>
@@ -1107,7 +1107,7 @@ body.modal-open {
                             <figure class="effect-jazz mb-0">
                                 <!-- Thumbnail với nút Play -->
                                 <div class="video-thumbnail-container" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
-                                    <img src="../../../../assets/img/5.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                                    <img [src]="course.avatarCourseUrl" class="video-thumbnail" alt="Video Thumbnail">
                                     <button class="play-button" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#videoModal_fin_' + i">
                                         ▶
                                     </button>

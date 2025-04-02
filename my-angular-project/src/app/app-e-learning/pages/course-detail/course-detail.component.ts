@@ -4,7 +4,7 @@ import { AppService } from '../../store/app.service';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth.service';
 import Swal from 'sweetalert2';
-import { UserCourseName } from '../../store/models/user.model';
+import { NotiBuyCourse, UserCourseName } from '../../store/models/user.model';
 
 @Component({
   selector: 'app-course-detail',
@@ -36,27 +36,35 @@ export class CourseDetailComponent implements OnInit {
     private authService: AuthService
   ) {}
 
- 
+  noti: NotiBuyCourse = new NotiBuyCourse();
 
   ngOnInit() {
     this.userRoles = this.authService.getUserRoles(); // Lấy role của user từ token
     this.userName = this.authService.getUserName();  // Lấy tên của user từ token
     
+    if(this.userRoles.length < 0){
+      this.router.navigate(['sign-in']);
+    }
+
     this.route.queryParams.subscribe(params => {
       this.courseName = params['courseName']; // Lấy giá trị courseName
       console.log('Course Name:', this.courseName);
     });
-
     this.listCourse = this.appservice.loadCourseByName(this.courseName).subscribe(
       (data) => {
         this.listCourse = data;
-        
-        console.log("listCourse :"+this.listCourse.data.price);
-        
-
+        console.log("listCourse price :"+this.listCourse.data.price);
       }
     );
 
+    this.noti.courseName = this.courseName;
+    this.noti.userName = this.userName;
+    this.appservice.notiBuyCourse(this.noti).subscribe(
+      (data) => {
+        
+        console.log(data);
+      }
+    );
   }
 
 
@@ -64,7 +72,8 @@ export class CourseDetailComponent implements OnInit {
   payment( price: any) {
 
     console.log(price);
-    
+    // Nếu giá khóa học = 0 thì thêm khóa học vào danh sách khóa học của người dùng( mua luôn khóa học)
+    // và chuyển hướng đến trang home
     if(this.listCourse.data.price === 0 || this.listCourse.data.price === '0' || this.listCourse.data.price === null){
     
       this.userCourseName.username = this.userName;
@@ -92,7 +101,17 @@ export class CourseDetailComponent implements OnInit {
           }
 
     });
-  } 
+  }
+  // nếu khóa học có giá > 0 thì chuyển hướng đến trang thanh toán
+  // và gửi thông tin khóa học và tên người dùng đến trang thanh toán
+    else if(this.listCourse.data.price > 0 || this.listCourse.data.price > '0' || this.listCourse.data.price !== null){
+      this.userCourseName.username = this.userName;
+      this.userCourseName.course_name = this.courseName;
+
+      // Call api thanh toán
+      // Chuyển hướng đến trang thanh toán
+      this.router.navigate(['payment'], { queryParams: { courseName: this.courseName, price: this.listCourse.data.price } });      
+    }
   else {
     Swal.fire({
       icon: 'error',
@@ -104,7 +123,17 @@ export class CourseDetailComponent implements OnInit {
   }
 }
 
+myCourse() { // Chuyển hướng đến trang my course
+  this.router.navigate(['my-course']);
+}
 
+openTeacherPage() { // Chuyển hướng đến trang teacher page
+  this.router.navigate(['teacher-page']);
+}
+
+openAdmin() { // Chuyển hướng đến trang admin
+  this.router.navigate(['admin']);
+}
   
   viewProfile() { // Chuyển hướng đến trang profile
     this.router.navigate(['profile']);

@@ -95,15 +95,7 @@
 				
       </ul>
 
-<!-- 	  
-      <ul class="navbar-nav mb-0 ms-auto">
-	   <li class="nav-item">
-          <a class="nav-link" href="login.html">Sign In</a>
-        </li>
-		<li class="nav-item">
-          <a class="nav-link button" href="register.html">Sign Up</a>
-        </li>
-      </ul> -->
+	  
 	  <ul *ngIf="isLoggedIn()" class="navbar-nav mb-0 ms-auto">
 		<li class="nav-item">
 		   <a class="nav-link" (click)="signIn()">Sign In</a>
@@ -117,16 +109,19 @@
 		 <li class="nav-item dropdown">
 			 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrY7dJj0QnImGcypj9oBdr9u9joHrxgaKY_g&s" class="rounded-circle me-2" width="32" height="25" alt="User Avatar">
-				 <span>Xin chào, {{ userName }}</span>
+				 <span>Hello, {{ userName }}</span>
 			   </a>
 		   <ul style="cursor: pointer;" class="dropdown-menu drop_1"  aria-labelledby="navbarDropdown">
+			 <li *ngIf="hasRole('Admin')" ><a class="dropdown-item" (click)="openAdmin()">🖥  Trang quản trị</a></li>
+			 <li *ngIf="hasRole('Teacher')" ><a class="dropdown-item" (click)="openTeacherPage()"> 👨‍🏫  Trang cho giáo viên</a></li>
+			 <li ><a class="dropdown-item" (click)="myCourse()">🎓  Khóa học của tôi</a></li>
 			 <li ><a class="dropdown-item" (click)="viewProfile()">👤 Thông tin cá nhân</a></li>
 			   <li><a class="dropdown-item" (click)="editProfile()">⚙️ Chỉnh sửa thông tin</a></li>
-			   <li><a class="dropdown-item text-danger"  (click)="logout()">🚪 Đăng xuất</a></li>
+			   <li><a class="dropdown-item text-danger"  (click)="logout()">🚪 Đăngxuất</a></li>
 		   </ul>
 		 </li>
 	   </ul>
-
+ 
 
 
     </div>
@@ -161,7 +156,7 @@
 	   <div class="center_h1r1">
 	     <div class="grid clearfix">
 				  <figure class="effect-jazz mb-0">
-					<a href="#"><img src="../../../../assets/img/23.jpg" class="w-100" alt="abc"></a>
+					<a href="#"><img src="../../../../assets/img/pexels-helloaesthe-31325373.jpg" class="w-100" alt="abc"></a>
 				  </figure>
 			  </div>
 	   </div>
@@ -438,7 +433,7 @@
 		<h6><i class="fa fa-bars me-1 col_green"></i> Level <span class="pull-right text-muted">Secondary</span></h6><hr>
 		<h6><i class="fa fa-book me-1 col_green"></i> Language <span class="pull-right text-muted">{{listCourse.data.language}}</span></h6><hr>
 		<h6 class="mb-0"><i class="fa fa-certificate me-1 col_green"></i> Certificate <span class="pull-right text-muted">{{listCourse.data.certificate}}</span></h6><hr>
-		<h6 class="mb-0 text-center mt-4"><a class="button_1" (click)="payment(listCourse.data.price)">Buy Now</a></h6>
+		<h6 style="cursor: pointer;" class="mb-0 text-center mt-4"><a class="button_1" (click)="payment(listCourse.data.price)">Buy Now</a></h6>
 	   </div>
 	   <div class="course_dt1r2 mt-4">
 	  <h4>Share Course:</h4>

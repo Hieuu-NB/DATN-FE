@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
-import { DetailCourse, Reviews } from '../../store/models/user.model';
+import { DetailCourse, LoadLessonByCourseNameAndUserName, Reviews } from '../../store/models/user.model';
 
 interface Course {
   id: number;
@@ -176,15 +176,33 @@ export class TeacherPageComponent {
 
   userRoles: string[] = []; // Mảng chứa các role của user
   userName: string = ''; // Tên của user
+  input: LoadLessonByCourseNameAndUserName = new LoadLessonByCourseNameAndUserName();
 onSearchCourse() { 
 // show danh sách các khóa học theo tên bài học dc nhập vào có hiển thị popup thông báo
 //  và call api, data sẽ được show ở bên phải màn hình của khóa học đó
     const inputValue = this.courseInput.nativeElement.value;
     console.log('Giá trị nhập:', inputValue);
 
-    this.appservice.loadLessonByCourseNameApi(inputValue).subscribe((data) => {
-      console.log('Data:', data);
+    console.log(this.userName);
+    this.input.courseName = inputValue;
+    this.input.userName = this.userName;
+
+
+    this.appservice.loadLessonByCourseNameAndUserNameApi(this.input).subscribe((data) => {
+      if (  data != null  ) {
+        console.log('Data:', data);
       this.lessons = data;
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'info',
+          title: 'Không tìm thấy bài học nào của bạn tên là : '+ inputValue,
+          text: 'Vui lòng thử lại sau!',
+          confirmButtonText: 'OK',
+        });
+      }
+      
     }
     );
 }
@@ -387,6 +405,131 @@ test()  {
 //   });
 
 // }
+// uploadCourse() {
+//   if (!this.courseForm.valid || !this.selectedFileCourse) {
+//     Swal.fire({
+//       icon: 'info',
+//       title: 'Upload không thành công !',
+//       text: 'Vui lòng nhập đầy đủ thông tin và chọn file',
+//       confirmButtonText: 'OK',
+//     });
+//     return;
+//   }
+
+//   this.isLoading = true;
+
+//   const courseName = this.courseForm.get('courseName')?.value;
+//   const title = this.courseForm.get('title')?.value;
+//   const description = this.courseForm.get('tidescriptiontle')?.value;
+//   const avatarCourseUrl = this.courseForm.get('avatarCourseUrl')?.value;
+//   const price = this.courseForm.get('price')?.value;
+//   const content = this.courseForm.get('content')?.value;
+//   const author = this.authService.getUserName();
+
+//   const courseData = {
+//     course_name: courseName,
+//     title,
+//     description,
+//     avatarCourseUrl,
+//     price,
+//     content,
+//     author
+//   };
+
+//   const formData = new FormData();
+//   formData.append('file', this.selectedFileCourse);
+//   formData.append('data', new Blob([JSON.stringify(courseData)], { type: 'application/json' }));
+
+//   // Gọi API 1 trước
+//   this.appservice.uploadNewCourse(formData).subscribe({
+//     next: (response) => {
+//       if (response.status === 200) {
+//         Swal.fire({
+//           icon: 'success',
+//           title: 'Upload thành công !',
+//           text: response.message,
+//           confirmButtonText: 'OK',
+//         });
+
+//         // Tiếp tục chuẩn bị dữ liệu cho API 2
+//         this.courseDetail.course_name = courseName;
+//         this.courseDetail.instructor = author;
+//         this.courseDetail.curriculum = title;
+//         this.courseDetail.description = description;
+//         this.courseDetail.price = price;
+
+//         const timeCourse = this.courseForm.get('timeCourse')?.value;
+//         const lectures = this.courseForm.get('lectures')?.value;
+//         const language = this.courseForm.get('language')?.value;
+//         const certificate = this.courseForm.get('certificate')?.value;
+
+//         this.courseDetail.timeCourse = timeCourse;
+//         this.courseDetail.lectures = lectures;
+//         this.courseDetail.language = language;
+//         this.courseDetail.certificate = certificate;
+
+//         const reviewsList: Reviews[] = [];
+//         const reviewDefault = new Reviews();
+//         reviewDefault.rating = 5;
+//         reviewDefault.comment = "Bài giảng rất chi tiết!";
+
+//         this.reviewsList.push(reviewDefault);
+
+//         this.courseDetail.reviews = this.reviewsList;
+        
+//         // Gọi API 2 sau khi API 1 thành công
+//         this.appservice.addDetailLessonApi(this.courseDetail).subscribe({
+          
+//           next: (response2) => {
+//             if (response2.status === 200) {
+//               Swal.fire({
+//                 icon: 'success',
+//                 title: 'Thêm chi tiết khóa học thành công!',
+//                 text: response2.message,
+//                 confirmButtonText: 'OK',
+//               });
+//               this.courseForm.reset();
+//               this.ngOnInit();
+//             } else {
+//               Swal.fire({
+//                 icon: 'info',
+//                 title: 'Thêm chi tiết không thành công!',
+//                 text: response2.message,
+//                 confirmButtonText: 'OK',
+//               });
+//             }
+//             this.isLoading = false;
+//           },
+//           error: (error) => {
+//             console.error('Lỗi add chi tiết:', error);
+//             this.isLoading = false;
+//             alert('Thêm chi tiết thất bại!');
+//             this.courseForm.reset();
+//           }
+//         });
+
+//       } else {
+//         this.isLoading = false;
+//         Swal.fire({
+//           icon: 'info',
+//           title: 'Upload không thành công !',
+//           text: response.message,
+//           confirmButtonText: 'OK',
+//         });
+//         this.courseForm.reset();
+//       }
+//     },
+
+//     error: (error) => {
+//       console.error('Lỗi upload:', error);
+//       this.isLoading = false;
+//       alert('Upload thất bại!');
+//       this.courseForm.reset();
+//     }
+//   });
+// }
+
+
 uploadCourse() {
   if (!this.courseForm.valid || !this.selectedFileCourse) {
     Swal.fire({
@@ -426,6 +569,7 @@ uploadCourse() {
   this.appservice.uploadNewCourse(formData).subscribe({
     next: (response) => {
       if (response.status === 200) {
+        this.isLoading = false;
         Swal.fire({
           icon: 'success',
           title: 'Upload thành công !',
@@ -450,56 +594,46 @@ uploadCourse() {
         this.courseDetail.language = language;
         this.courseDetail.certificate = certificate;
 
-
         const reviewsList: Reviews[] = [];
         const reviewDefault = new Reviews();
         reviewDefault.rating = 5;
         reviewDefault.comment = "Bài giảng rất chi tiết!";
 
-
-
         this.reviewsList.push(reviewDefault);
 
         this.courseDetail.reviews = this.reviewsList;
-
-        console.log('reviews:', this.reviewsList[0]);
         
-
-        
-
-
-        console.log('courseDetail:', this.courseDetail);
-        
-        // Gọi API 2 sau khi API 1 thành công
-        this.appservice.addDetailLessonApi(this.courseDetail).subscribe({
-          
-          next: (response2) => {
-            if (response2.status === 200) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Thêm chi tiết khóa học thành công!',
-                text: response2.message,
-                confirmButtonText: 'OK',
-              });
+        // 🕒 Đợi 60s giây trước khi gọi API 2
+        setTimeout(() => {
+          this.appservice.addDetailLessonApi(this.courseDetail).subscribe({
+            next: (response2) => {
+              if (response2.status === 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Thêm chi tiết khóa học thành công!',
+                  text: response2.message,
+                  confirmButtonText: 'OK',
+                });
+                this.courseForm.reset();
+                this.ngOnInit();
+              } else {
+                Swal.fire({
+                  icon: 'info',
+                  title: 'Thêm chi tiết không thành công!',
+                  text: response2.message,
+                  confirmButtonText: 'OK',
+                });
+              }
+              this.isLoading = false;
+            },
+            error: (error) => {
+              console.error('Lỗi add chi tiết:', error);
+              this.isLoading = false;
+              alert('Thêm chi tiết thất bại!');
               this.courseForm.reset();
-              this.ngOnInit();
-            } else {
-              Swal.fire({
-                icon: 'info',
-                title: 'Thêm chi tiết không thành công!',
-                text: response2.message,
-                confirmButtonText: 'OK',
-              });
             }
-            this.isLoading = false;
-          },
-          error: (error) => {
-            console.error('Lỗi add chi tiết:', error);
-            this.isLoading = false;
-            alert('Thêm chi tiết thất bại!');
-            this.courseForm.reset();
-          }
-        });
+          });
+        }, 40000); // 🕒 Trì hoãn 60s mới gọi api
 
       } else {
         this.isLoading = false;
@@ -521,8 +655,6 @@ uploadCourse() {
     }
   });
 }
-
-
 
 
 

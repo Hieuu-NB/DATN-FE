@@ -30,7 +30,10 @@ export class AboutUsComponent implements OnInit {
     this.userName = this.authService.getUserName();  // Lấy tên của user từ token
   }
 
-
+  openListAuthor() { // Mở modal about us
+    this.router.navigate(['list-author']);
+    }
+    
   myCourse() { // Chuyển hướng đến trang my course
     this.router.navigate(['my-course']);
   }

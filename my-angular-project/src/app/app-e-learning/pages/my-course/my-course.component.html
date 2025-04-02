@@ -144,8 +144,12 @@
 		  <div class="course_h3i1 border_1 p-3 rounded_10">
 		    <div class="grid clearfix">
 				  <figure class="effect-jazz mb-0">
-					<a href="blog_detail.html"><img src="../../../../assets/img/2.jpg" class="w-100" alt="abc"></a>
-				  </figure>
+					<!-- <a href="blog_detail.html"><img [src]="course.avatarCourseUrl" class="w-100" alt="abc"></a> -->
+					<!-- <a href="blog_detail.html"><img src="../../../../assets/img/2.jpg" class="w-100" alt="abc"></a> -->
+					<!-- Kiểm tra nếu course.avatarCourseUrl không null thì hiển thị ảnh từ URL, ngược lại sử dụng ảnh mặc định từ assets -->
+					<img [src]="course.avatarCourseUrl ? course.avatarCourseUrl : 'assets/images/istockphoto.jpg'" alt="Course Image">
+
+				</figure>
 			  </div>
 			<div class="course_h3i1i row mt-3">
 			 <div class="col-md-8 col-8">
@@ -179,7 +183,12 @@
 				<div class="course_h3i1 border_1 p-3 rounded_10">
 				  <div class="grid clearfix">
 						<figure class="effect-jazz mb-0">
-						  <a href="blog_detail.html"><img src="../../../../assets/img/2.jpg" class="w-100" alt="abc"></a>
+						  <a href="blog_detail.html">
+							<!-- <img src="../../../../assets/img/2.jpg" class="w-100" alt="abc"> -->
+					<img [src]="course.avatarCourseUrl ? course.avatarCourseUrl : 'assets/images/istockphoto.jpg'" alt="Course Image">
+
+						</a>
+
 						</figure>
 					</div>
 				  <div class="course_h3i1i row mt-3">
@@ -187,6 +196,7 @@
 					<div class="course_h3i1il">
 					 <h6 class="font_14">
 					 <a><img src="../../../../assets/img/8.jpg" class="rounded-circle me-2" alt="abc">
+						
 					  {{course.course_name}}
 				  </a></h6>
 					</div>

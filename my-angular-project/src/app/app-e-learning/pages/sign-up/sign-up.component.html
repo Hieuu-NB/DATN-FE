@@ -150,7 +150,7 @@
 	 <div class="log_box1r">
 	  <h3 class="mb-4">Registration <span class="col_green">Now</span></h3>
 
-      <form [formGroup]="signUpForm" id="signUp-form" >
+      <!-- <form [formGroup]="signUpForm" id="signUp-form" >
         <input class="form-control rounded-3" formControlName="username" placeholder="Username" type="text">
         <input class="form-control rounded-3 mt-3" formControlName="email" placeholder="Email" type="text">
         <input class="form-control rounded-3 mt-3" formControlName="phone" placeholder="Phone" type="text">
@@ -164,9 +164,56 @@
           </select>
           
         
-      </form> 
+      </form>  -->
 
-	  <h6 class="mb-0 mt-4 text-center"><a class="button_1 d-block" (click)="register()">Create an account </a></h6>
+	  <form [formGroup]="signUpForm" id="signUp-form" (ngSubmit)="register()">
+		<!-- Username -->
+		<input class="form-control rounded-3" formControlName="username" placeholder="Username" type="text">
+		<div *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched" class="text-danger">
+			Username phải có ít nhất 3 ký tự!
+		</div>
+	
+		<!-- Email -->
+		<input class="form-control rounded-3 mt-3" formControlName="email" placeholder="Email" type="text">
+		<div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched" class="text-danger">
+			Email không hợp lệ!
+		</div>
+		<span *ngIf="signUpForm.get('email')?.hasError('pattern')">
+			❌ Email không hợp lệ! Hãy nhập đúng định dạng.
+		</span>
+		<!-- Phone -->
+		<input class="form-control rounded-3 mt-3" formControlName="phone" placeholder="Phone" type="text">
+		<div *ngIf="signUpForm.get('phone')?.invalid && signUpForm.get('phone')?.touched" class="text-danger">
+			Số điện thoại phải có 10-11 chữ số!
+		</div>
+	
+		<!-- Password -->
+		<input class="form-control rounded-3 mt-3" formControlName="password" placeholder="Password" type="password">
+		<div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched" class="text-danger">
+			Mật khẩu phải có ít nhất 8 ký tự, chứa chữ hoa, chữ thường và số!
+		</div>
+	
+		<!-- Confirm Password -->
+		<input class="form-control rounded-3 mt-3" formControlName="confirmPassword" placeholder="Confirm Password" type="password">
+		<div *ngIf="signUpForm.hasError('mismatch') && signUpForm.get('confirmPassword')?.touched" class="text-danger">
+			Mật khẩu nhập lại không khớp!
+		</div>
+	
+		<!-- Role -->
+		<select class="form-control rounded-3 mt-3" formControlName="role">
+			<option value="" disabled selected>Role</option>
+			<option value="Teacher">Teacher</option>
+			<option value="Student">Student</option>
+		</select>
+		<div *ngIf="signUpForm.get('role')?.invalid && signUpForm.get('role')?.touched" class="text-danger">
+			Vui lòng chọn vai trò!
+		</div>
+	
+	</form>
+	
+
+
+	  <h6 class="mb-0 mt-4 text-center"><a class="button_1 d-block"(click)="register()">Create an account </a></h6>
 	  <h6 class="mb-0 mt-4 text-center"><a class="button d-block" href="#">Sign up with Google </a></h6>
 	 </div>
 	</div>

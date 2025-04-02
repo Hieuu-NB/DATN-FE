@@ -303,6 +303,92 @@ body {
 .dropdown-content a i {
   margin-right: 8px;
 }
+
+
+
+/*  commemt */
+.comment-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.top-level {
+  border-left: 3px solid #007bff;
+}
+
+.reply-item {
+  margin-left: 30px;
+  margin-top: 10px;
+  border-left: 3px solid #6c757d;
+  background-color: #f1f1f1;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.reply-btn, .view-replies-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9em;
+}
+
+.reply-btn:hover, .view-replies-btn:hover {
+  text-decoration: underline;
+}
+
+.reply-form {
+  margin-top: 15px;
+}
+
+.reply-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.reply-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  padding: 5px 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  padding: 5px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+}
     </style>
    
   
@@ -388,15 +474,97 @@ body {
     <!-- Tab Content -->
     <div class="tab-content">
       <div *ngIf="activeTab === 'content'">
-        <p>Nội dung chi tiết của bài giảng.</p>
+        <p>{{selectedLecture.titleDetail}}</p>
       </div>
-      <div *ngIf="activeTab === 'comments'">
+
+      <!-- <div *ngIf="activeTab === 'comments'">
         <p>Bình luận từ người học.</p>
+      </div> -->
+
+      <div *ngIf="activeTab === 'comments'" class="comments-section">
+        <h3>Bình luận ({{getTotalComments()}})</h3>
+        
+        <div class="comment-list">
+          <ng-container *ngFor="let comment of comments">
+            <!-- Comment gốc -->
+            <div class="comment-item" [class.top-level]="!comment.parentId">
+              <div class="comment-header">
+                <img *ngIf="comment.userAvatar" [src]="comment.userAvatar" class="user-avatar">
+                <span class="user-name">{{comment.userName}}</span>
+                <span class="comment-time">{{comment.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+              </div>
+              <div class="comment-content">
+                {{comment.content}}
+              </div>
+              <div class="comment-actions">
+                <button (click)="toggleReplyForm(comment.id)" class="reply-btn">Trả lời</button>
+                <button *ngIf="comment.replies?.length" (click)="toggleReplies(comment)" class="view-replies-btn">
+                  {{comment.isExpanded ? 'Ẩn' : 'Xem'}} trả lời ({{comment.replies.length}})
+                </button>
+              </div>
+              
+              <!-- Form trả lời -->
+              <div *ngIf="activeReplyForm === comment.id" class="reply-form">
+                <textarea [(ngModel)]="replyContents[comment.id]" placeholder="Viết trả lời..." class="reply-input"></textarea>
+                <div class="reply-actions">
+                  <button (click)="cancelReply()" class="cancel-btn">Hủy</button>
+                  <button (click)="submitReply(comment)" class="submit-btn" [disabled]="!replyContents[comment.id].trim()">
+                    Gửi
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Danh sách replies (đệ quy) -->
+              <div *ngIf="comment.isExpanded && comment.replies?.length" class="replies-list">
+                <div *ngFor="let reply of comment.replies" class="comment-item reply-item">
+                  <!-- Sử dụng cùng template cho reply -->
+                  <div class="comment-header">
+                    <img *ngIf="reply.userAvatar" [src]="reply.userAvatar" class="user-avatar">
+                    <span class="user-name">{{reply.userName}}</span>
+                    <span class="comment-time"> - {{reply.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+                  </div>
+                  <div class="comment-content">
+                    {{reply.content}}
+                  </div>
+                  <!-- <div class="comment-actions">
+                    <button (click)="toggleReplyForm(reply.id)" class="reply-btn">Trả lời</button>
+                  </div> -->
+                  
+                  <!-- Form trả lời cho reply -->
+                  <div *ngIf="activeReplyForm === reply.id" class="reply-form">
+                    <textarea [(ngModel)]="replyContents[reply.id]" placeholder="Viết trả lời..." class="reply-input"></textarea>
+                    <div class="reply-actions">
+                      <button (click)="cancelReply()" class="cancel-btn">Hủy</button>
+                      <button (click)="submitReply(reply)" class="submit-btn" [disabled]="!replyContents[reply.id].trim()">
+                        Gửi
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- Có thể thêm replies của reply ở đây nếu muốn hiển thị đệ quy sâu hơn -->
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        
+        <!-- Form thêm comment mới (gốc) -->
+        <div
+        class="add-comment">
+          <h4>Thêm bình luận mới</h4>
+          <textarea  style="width: 100%;" [(ngModel)]="newComment" placeholder="Viết bình luận của bạn..." class="comment-input" rows="4"></textarea>
+          <button style="padding: 5px; border-radius: 5px; background: #007bff;color: white;" (click)="addComment()" class="comment-submit" [disabled]="!newComment.trim()">Gửi bình luận</button>
+        </div>
       </div>
+
+
+
       <div *ngIf="activeTab === 'resources'" >
         <p>Tài liệu tham khảo và file đính kèm.</p>
       </div>
     </div>
+
+    
   </div>
 
     </div>
@@ -425,6 +593,91 @@ body {
         </div>
     </div>
 
+
+
+
+
+
+
+<section id="footer" class="p_3 bg_light">
+  <div class="container-xl">
+    <div class="row footer_1" style="padding: 50px 200px;">
+     <div class="col-md-3">
+    <div class="footer_1i">
+     <h4 class="mb-3"><a href="index.html"><i class="fa fa-book me-1 col_green"></i> Online <span class="col_green">Learning</span> </a></h4>
+     <h5>Semper Dt</h5>
+     <h6 class="col_green mt-3 mb-3">Lorem, Augue (UB).</h6>
+     <h6><i class="fa fa-envelope col_green me-1 fs-5 align-middle"></i> <a href="#">{{info}}</a></h6>
+     <h6 class="mt-3"><i class="fa fa-phone col_green me-1 fs-5 align-middle"></i> <a href="#">+(000) 345 67 89 </a></h6>
+     <ul class="mb-0 mt-3">
+       <li class="d-inline-block fs-4 me-2"> <a href="#"><i class="fa fa-facebook"></i></a></li>
+       <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-twitter"></i></a></li>
+         <li class="d-inline-block fs-4 me-2"> <a  href="#"><i class="fa fa-skype"></i></a></li>
+         <li class="d-inline-block fs-4"> <a  href="#"><i class="fa fa-instagram"></i></a></li>
+      </ul>
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="footer_1i">
+     <h4 class="mb-3">Category</h4>
+     <div class="row footer_3ism">
+       <h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Creative Writing</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Film & Video</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Graphic Design</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> UI/UX Design</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Business Analytics</a></h6>
+       <h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Marketing</a></h6>
+       </div>
+   
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="footer_1i">
+     <h4 class="mb-3">Quick Links</h4>
+     <div class="row footer_3ism">
+       <h6 class="col-md-12 col-6"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Privacy Policy</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Discussion</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Terms & Conditions</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Customer Support</a></h6>
+       <h6 class="col-md-12 col-6 mt-2"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i>  Our Service</a></h6>
+       <h6 class="col-md-12 col-6 mt-2 mb-0"><a  href="#"><i class="fa fa-chevron-right me-1 font_12 col_green"></i> Course FAQ’s</a></h6>
+       </div>
+   
+    </div>
+   </div>
+   <div class="col-md-3">
+    <div class="footer_1i">
+     <h4 class="mb-3">Subscribe</h4>
+     <p>Lorem Ipsum has been them an industry printer took a galley make book.</p>
+     <input class="form-control rounded_10" placeholder="Email here" type="text">
+   <h6 class="mb-0 mt-3"><a class="button_1" href="#">Subscribe Now</a></h6>
+    </div>
+   </div>
+    </div>
+  </div>
+ </section>
+ 
+ <section id="footer_b" class="pt-3 pb-3 bg_dark">
+  <div class="container-xl">
+    <div class="footer_b1 row">
+   <div class="col-md-5">
+    <div class="footer_b1r">
+     <ul class="mb-0">
+      <li class="d-inline-block me-2"><a class="text-white" href="#">Our Terms</a></li>
+      <li class="d-inline-block me-2"><a class="text-white" href="#">Privacy</a></li>
+      <li class="d-inline-block me-2"><a class="text-white" href="#">Sitemap</a></li>
+      <li class="d-inline-block"><a class="text-white" href="#">Support</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="col-md-7">
+    <div class="footer_b1l text-end">
+      <p class="mb-0 text-light">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_green fw-bold" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
+    </div>
+   </div>
+    </div>
+  </div>
+ </section>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
       const tabLinks = document.querySelectorAll('.tab-link');

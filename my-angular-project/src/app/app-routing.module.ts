@@ -14,6 +14,8 @@ import { TeacherPageComponent } from './app-e-learning/pages/teacher-page/teache
 import { AboutUsComponent } from './app-e-learning/pages/about-us/about-us.component';
 import { ListAuthorComponent } from './app-e-learning/pages/list-author/list-author.component';
 import { AuthorDetailComponent } from './app-e-learning/pages/author-detail/author-detail.component';
+import { DataResolver } from './app-e-learning/store/data.resolver';
+import { PaymentCourseComponent } from './app-e-learning/pages/payment-course/payment-course.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },                     // trang mặc định là trang chủ
@@ -27,8 +29,9 @@ const routes: Routes = [
   { path: 'learning-page',component: LearningComponent },     // trang học của sinh viên
   { path: 'teacher-page',component: TeacherPageComponent },   // trang giáo viên
   { path: 'about-us',component: AboutUsComponent },           // trang giới thiệu về chúng tôi
-  { path: 'list-author',component: ListAuthorComponent },     // trang danh sách tác giả
+  { path: 'list-author',component: ListAuthorComponent ,resolve: { apiData: DataResolver }},     // trang danh sách tác giả
   { path: 'author-detail',component: AuthorDetailComponent }, // trang chi tiết tác giả
+  { path: 'payment',component: PaymentCourseComponent }, // trang thanh toán
   { path: 'unauthorized',component: UnauthorizedComponent }, // trang không có quyền truy cập
 
 ];

@@ -809,7 +809,7 @@ input[type="file"].form-control {
                                 </div>
                                 
                                  <!-- Hiển thị danh sách bài học đã upload -->
-                                 <h3>Danh sách bài học đã upload:</h3>
+                                 <!-- <h3>Danh sách bài học đã upload:</h3> -->
                                  <ul>
                                     <!-- <li *ngFor="let lesson of course.lessons">
                                        <strong>{{ lesson.name }}</strong> - {{ lesson.description }} ({{ lesson.duration }})
@@ -834,7 +834,7 @@ input[type="file"].form-control {
                      <!-- Course Table -->
                      <div id="courses" class="tab-pane ">
                         <div class="table-container">
-                           <h2>Upload Bài Học</h2>
+                           <h2>Upload Bài Học Của Tôi</h2>
                            <div style="display: flex;justify-content: space-between;">
                             <form [formGroup]="uploadFormLesson"  id="lesson-form">
                               <!-- Trường byCourse -->
@@ -846,7 +846,7 @@ input[type="file"].form-control {
                                       id="byCourse"
                                       class="form-control rounded-3"
                                       formControlName="byCourse"
-                                      placeholder="Tên khóa học"
+                                      placeholder="Tên khóa học của tôi"
                                       required
                                       #nameCourse
                                     />
@@ -956,7 +956,7 @@ input[type="file"].form-control {
 
 <!-- Nếu có lessons, hiển thị danh sách -->
 <ng-template #hasLessons>
-  <div *ngFor="let lesson of lessons" class="lesson-card">
+  <div style="margin-bottom: 5px;" *ngFor="let lesson of lessons" class="lesson-card">
     <div class="lesson-thumbnail">
       <img 
         [src]="lesson.avatarLesson || 'https://nehalist.io/content/images/2017/09/angular-logo.png'" 

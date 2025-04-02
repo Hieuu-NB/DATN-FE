@@ -30,11 +30,19 @@ export class HomeComponent implements OnInit {
       private router:Router,
       private authService: AuthService
     ) { }
+
+  totalCourse: any; // Tổng số khóa học
   ngOnInit(): void { 
     this.userRoles = this.authService.getUserRoles(); // Lấy role của user từ token
     this.userName = this.authService.getUserName();  // Lấy tên của user từ token
-
-
+    // Gọi service để load tổng số khóa học
+    this.appservice.totalCourse().subscribe(
+      (data) => {
+        this.totalCourse = data.data;
+        console.log("totalCourse :"+this.totalCourse);
+      }
+    );
+    // Gọi service để load tất cả khóa học
     this.listCourse = this.appservice.loadAllCourse().subscribe(
       (data) => {
         this.listCourse = data;
@@ -63,7 +71,7 @@ export class HomeComponent implements OnInit {
           }
         }
 
-        console.log(this.courseFinancial);
+     
 
       }
     );

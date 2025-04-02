@@ -21,12 +21,12 @@ import { TeacherPageModule } from './app-e-learning/pages/teacher-page/teacher-p
 import { CourseDetailPopupModule } from './app-e-learning/pages/popup/course-detail-popup/course-detail-popup.module';
 import { AboutUsModule } from './app-e-learning/pages/about-us/about-us.modue';
 import { ListAuthorComponentModule } from './app-e-learning/pages/list-author/list-author.module';
-import { AuthorDetailComponent } from './app-e-learning/pages/author-detail/author-detail.component';
 import { AuthorDetailModule } from './app-e-learning/pages/author-detail/author-detail.module';
+import { PaymentCourseModule } from './app-e-learning/pages/payment-course/payment-course.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,8 @@ import { AuthorDetailModule } from './app-e-learning/pages/author-detail/author-
     CourseDetailPopupModule,
     AboutUsModule,
     ListAuthorComponentModule,
-    AuthorDetailModule
+    AuthorDetailModule,
+    PaymentCourseModule
 
   ],
   providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true }],
