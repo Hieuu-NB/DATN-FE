@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadLessonByCourseNameAndUserName, NotiBuyCourse, User, UserCourseName, UserEdit, UserName, UserRegister } from "./models/user.model";
+import { LoadLessonByCourseNameAndUserName, NotiBuyCourse, PaymentCourse, User, UserCourseName, UserEdit, UserName, UserRegister } from "./models/user.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -215,6 +215,10 @@ export class AppService {
       return this.http.post(`http://localhost:9006/email/send-email-welcome/${email}`, null);
     }
 
+    sendEmailPaymentSuccess(noti: NotiBuyCourse): Observable<any> {
+      return this.http.post(`http://localhost:9004/notification-service/send-email-noti-payment-success`, noti);
+    }
+
     notiBuyCourse(noti: NotiBuyCourse): Observable<any> {
       return this.http.post(`http://localhost:9004/notification-service/send-email-noti-buy-course`, noti);
     }
@@ -223,4 +227,16 @@ export class AppService {
       return this.http.get(`http://localhost:8080/api/v1/payment/vn-pay?amount=${amount}&bankCode=${bankCode}`);
     }
     
+    savePaymentInfo(input: PaymentCourse): Observable<any> {
+      return this.http.post(`http://localhost:8080/payment-service/create-payment-course`, input);
+    }
+
+    updatePaymentStatusCourse(input: any): Observable<any> {
+      return this.http.post(`http://localhost:8080/payment-service/update-payment-status`, input);
+    }
+    
+
+    checkUserHasCourse(userCourseName: UserCourseName): Observable<any> {
+      return this.http.post(`http://localhost:1223/authorization-service/check-user-has-course`, userCourseName);
+    }
 }

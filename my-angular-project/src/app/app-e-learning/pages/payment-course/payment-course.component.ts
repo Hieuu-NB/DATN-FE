@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../../store/app.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth.service';
+import { NotiBuyCourse, PaymentCourse, UserCourseName } from '../../store/models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payment-course',
@@ -19,8 +21,14 @@ export class PaymentCourseComponent implements OnInit {
   paymentForm!: FormGroup;
   vnpayUrl: any;
   paymentStatus: string | null = null;
-  vnp_Amount: string | null = null;
-  vnp_BankCode: string | null = null;
+  vnp_TxnRef: string | null = null;
+  encodedCourseName: any;
+  courseNamePaymentDone: any;
+  paymentInfo: PaymentCourse = new PaymentCourse();
+  url_payment: string = '';
+
+  userCourseName = new UserCourseName();
+  noti: NotiBuyCourse = new NotiBuyCourse();
   constructor(
     private route: ActivatedRoute,
         private renderer: Renderer2, 
@@ -36,27 +44,86 @@ export class PaymentCourseComponent implements OnInit {
     this.userName = this.authService.getUserName();  // Lấy tên của user từ token
 
     this.route.queryParams.subscribe(params => {
+
+      // param trả về sau khi click vào chi tiết khóa học
       this.courseName = params['courseName'];
       this.price = params['price'];
 
+
+      // param trả về sau khi thanh toán xong
       this.paymentStatus = params['status'];
-      this.vnp_Amount = params['vnp_Amount'];
-      this.vnp_BankCode = params['vnp_BankCode'];
-      console.log("Payment status:"+ this.paymentStatus);
-      console.log("vnp_Amount :" + this.vnp_Amount);
-      console.log("vnp_BankCode :" + this.vnp_BankCode);
-      
+      this.vnp_TxnRef = params['vnp_TxnRef']; 
+      this.encodedCourseName = params['courseNamePaymentDone']; 
+
+      const courseNamePaymentDone = decodeURIComponent(this.encodedCourseName || '');
+
+      if (this.paymentStatus === "paymentDone") {
+        this.courseNamePaymentDone = courseNamePaymentDone;
+        
+      }
+
+      console.log("courseNamePaymentDone"+courseNamePaymentDone); // "Khóa học lập trình cơ bản"
     });
     if (this.paymentStatus==="paymentDone") {
       this.stepPayment=3;
       console.log(this.courseName);
-      // cần gọi api thêm khóa học cho user sau khi payment xong 
+      // call api thay đổi status payyment thành processed
+
+      this.appservice.updatePaymentStatusCourse(this.vnp_TxnRef).subscribe({
+        next: (response) => {
+
+          this.userCourseName.username = this.userName;
+          this.userCourseName.course_name = this.courseNamePaymentDone;
+
+
+          console.log("call api thêm khóa học cho user :"+this.userCourseName.course_name);
+          console.log("call api thêm khóa học cho user :"+this.userCourseName.username);
+          // call api sent email mua khóa học thành công 
+          this.noti.courseName = this.courseNamePaymentDone;
+          this.noti.userName = this.userName;
+          this.appservice.sendEmailPaymentSuccess(this.noti).subscribe( // Gửi thông báo đến user khi mua khóa học thành công
+            (data) => {
+              console.log(data);
+            }
+          );
+          this.appservice.addCourseForUser(this.userCourseName).subscribe( // thêm khóa học cho user
+                (data) => {
+                  console.log(data);
+                  
+                  if(data.status === 200){        
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Mua khóa học thành công!',
+                        text: 'Chào mừng bạn đến với khóa học !',
+                        confirmButtonText: 'Tiếp tục',
+                      });
+                      // this.router.navigate(['home']);
+                    }else{
+                      Swal.fire({
+                        icon: 'info',
+                        title: data.message,
+                        text: 'Vui lòng thử lại sau!',
+                        confirmButtonText: 'Tiếp tục',
+                      });
+                      // this.router.navigate(['home']);
+                    }
+          
+              });
+
+          console.log('Cập nhật trạng thái thanh toán thành công:', response);
+        },
+        error: (error) => {
+          console.error('Lỗi khi cập nhật trạng thái thanh toán:', error);
+        }
+      });
+
+      // cần gọi api thêm khóa học cho user sau khi payment xong - ok  
       // và api thêm tiền cho teacher 
-      // api push kafka để gửi email noti đăng kí khóa học thành công 
+      // api push kafka để gửi email noti đăng kí khóa học thành công - ok
     }
 
 
-    this.paymentForm = this.fb.group({
+    this.paymentForm = this.fb.group({ // Tạo form thanh toán
       customerName: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -79,10 +146,38 @@ export class PaymentCourseComponent implements OnInit {
   proceedToPayment() {
     if (this.paymentForm.valid) {
       console.log(this.paymentForm.value);
+
       this.appservice.payWithVNPay(this.price, 'NCB').subscribe({
-        next: (response) => {
-          console.log('Thanh toán thành công:', response.data.paymentUrl);
-          window.location.href = response.data.paymentUrl; // Điều hướng trực tiếp
+        next: (response) => {          
+          const url = new URL(response.data.paymentUrl);
+          const txnRef = url.searchParams.get("vnp_TxnRef");
+          this.url_payment = response.data.paymentUrl;
+          // Gọi API để lưu thông tin thanh toán vào cơ sở dữ liệu nhưng chưa hoàn thành
+          this.paymentInfo.courseName = this.courseName;
+          this.paymentInfo.customerName = this.paymentForm.value.customerName;
+          this.paymentInfo.userName = this.userName;
+          this.paymentInfo.phoneNumber = this.paymentForm.value.phoneNumber;
+          this.paymentInfo.email = this.paymentForm.value.email;
+          this.paymentInfo.paymentMethod = this.paymentForm.value.paymentMethod;
+          this.paymentInfo.vnp_txn_ref = txnRef;
+          this.paymentInfo.price = this.price;
+          this.paymentInfo.payment_status = 'PROCESSING'; //processed nếu thành đã xong
+          this.appservice.savePaymentInfo(this.paymentInfo).subscribe({
+            next: (response) => {
+              console.log('Lưu thông tin thanh toán thành công:', response);
+              window.location.href = this.url_payment; // Điều hướng trực tiếp
+            },
+            error: (error) => {
+              console.error('Lỗi khi lưu thông tin thanh toán:', error);
+            }
+          });
+          // Gọi API để lưu thông tin thanh toán vào cơ sở dữ liệu
+
+
+         
+
+
+
         },
         error: (error) => {
           console.error('Lỗi khi thanh toán:', error);

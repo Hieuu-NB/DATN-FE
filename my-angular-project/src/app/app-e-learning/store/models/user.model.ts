@@ -57,3 +57,15 @@ export class NotiBuyCourse {
     courseName!: any;
     userName!: any;
 }
+
+export class PaymentCourse {
+    userName!: any;
+    customerName!: any;
+    courseName!: any;
+    phoneNumber!: any;
+    email!: any;
+    paymentMethod!: any;
+    vnp_txn_ref!: any;
+    price!: any;
+    payment_status!: any;
+}

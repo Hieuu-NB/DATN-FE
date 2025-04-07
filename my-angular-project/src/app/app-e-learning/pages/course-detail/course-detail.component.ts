@@ -59,9 +59,8 @@ export class CourseDetailComponent implements OnInit {
 
     this.noti.courseName = this.courseName;
     this.noti.userName = this.userName;
-    this.appservice.notiBuyCourse(this.noti).subscribe(
+    this.appservice.notiBuyCourse(this.noti).subscribe( // Gửi thông báo đến user khi click vào khóa học
       (data) => {
-        
         console.log(data);
       }
     );
@@ -104,13 +103,28 @@ export class CourseDetailComponent implements OnInit {
   }
   // nếu khóa học có giá > 0 thì chuyển hướng đến trang thanh toán
   // và gửi thông tin khóa học và tên người dùng đến trang thanh toán
+  // cần thêm 1 api check xem user có khóa học này chưa 
     else if(this.listCourse.data.price > 0 || this.listCourse.data.price > '0' || this.listCourse.data.price !== null){
       this.userCourseName.username = this.userName;
       this.userCourseName.course_name = this.courseName;
 
-      // Call api thanh toán
-      // Chuyển hướng đến trang thanh toán
-      this.router.navigate(['payment'], { queryParams: { courseName: this.courseName, price: this.listCourse.data.price } });      
+      this.appservice.checkUserHasCourse(this.userCourseName).subscribe(
+        (data) => {
+          console.log(data.message);
+          if(data.status === 400){
+            Swal.fire({
+              icon: 'info',
+              title: 'Bạn đã mua khóa học này rồi!',
+              text: 'Vui lòng kiểm tra lại danh sách khóa học của bạn!',
+              confirmButtonText: 'Tiếp tục',
+            });
+            this.router.navigate(['home']);
+          }
+          else{
+            // Chuyển hướng đến trang thanh toán
+            this.router.navigate(['payment'], { queryParams: { courseName: this.courseName, price: this.listCourse.data.price } });  
+          }
+        })
     }
   else {
     Swal.fire({
